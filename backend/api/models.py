@@ -37,7 +37,6 @@ class Problem(models.Model):
     name = models.CharField(max_length=255)
     object = models.ForeignKey("Object", on_delete=models.CASCADE)
     type = models.ForeignKey("ProblemType", on_delete=models.CASCADE)
-    task_in_work = models.ForeignKey("TaskInWork", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -89,9 +88,9 @@ class TaskInWork(models.Model):
         IN_PROGRESS = 'IN', _('IN_PROGRESS')
         READY = 'RE', _('READY')
 
-    start_fix = models.DateTimeField()
-    date_fix_update_at = models.DateTimeField()
-    finish_fix_at = models.DateTimeField()
+    start_fix = models.DateTimeField(null=True)
+    date_fix_update_at = models.DateTimeField(null=True)
+    finish_fix_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     status = models.CharField(
@@ -102,6 +101,7 @@ class TaskInWork(models.Model):
     status_update_at = models.DateTimeField()
 
     executor = models.ForeignKey("Executor", on_delete=models.CASCADE)
+    problem = models.OneToOneField("Problem", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.status} {self.executor}"
