@@ -4,5 +4,5 @@ export const App = () => {
         <div>
             HELLO WORLD!!!!
         </div>
-    )
-}
+    );
+};
