@@ -2,7 +2,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 export const buildCssLoader = (isDev: boolean) => {
     return {
-        test: /\.s[ac]ss$/i,
+        test: /s[ac]ss|css$/i,
         use: [
             // Если дев-сборка, то оставляем css внутри js файла, если же прод, то выносим в отдельные css файлы
             isDev ? "style-loader" : MiniCssExtractPlugin.loader,
