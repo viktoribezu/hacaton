@@ -1,11 +1,14 @@
 from datetime import datetime, timedelta
 
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractUser
+from authemail.models import EmailUserManager, EmailAbstractUser
 
 from django.db import models
+
+
+class Users(EmailAbstractUser):
+    objects = EmailUserManager()
 
 
 class ObjectType(models.Model):
@@ -60,7 +63,7 @@ class AppealCitizen(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     problem = models.ForeignKey("Problem", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
     criticality = models.CharField(
         max_length=2,
