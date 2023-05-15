@@ -1,9 +1,10 @@
 import { classNames } from "@/utils/lib";
 import { Button, Form, Input, Typography } from "antd";
-import cls from "./LoginPage.module.scss";
+import "./LoginPage.scss";
 import { useCallback } from "react";
+import { HStack } from "@/components/ui/Stack/HStack/HStack";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export const LoginPage = () => {
 
@@ -16,12 +17,13 @@ export const LoginPage = () => {
     }, []);
 
     return (
-        <div className={classNames(cls.loginPage, {}, [])}>
+        <div className={classNames("loginPage", {}, [])}>
             <Title level={2}>Авторизация пользователя</Title>
             <Form
                 name="login"
                 autoComplete="off"
                 layout="vertical"
+                labelCol={{ span: 24 }}
                 onFinish={onFinishHandler}
                 onFinishFailed={onFinishFailedHandler}
             >
@@ -32,18 +34,21 @@ export const LoginPage = () => {
                     <Input placeholder={"Введите логин"} />
                 </Form.Item>
                 <Form.Item
+                    label={
+                        <HStack justify={"between"} max>
+                            <Text>Пароль</Text>
+                            <Button type={"link"} size={"small"}>
+                                Восстановить пароль
+                            </Button>
+                        </HStack>
+                    }
                     name="password"
                     rules={[{ required: true, message: "Введите Ваш пароль!" }]}
                 >
                     <Input.Password placeholder={"Введите пароль"} />
                 </Form.Item>
-                <Form.Item noStyle>
-                    <Button className={cls.testUiButtonResetPassowrd} type={"link"} size={"small"}>
-                        Восстановить пароль
-                    </Button>
-                </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className={cls.loginFormButton}>
+                    <Button type="primary" htmlType="submit" className={"loginFormButton"}>
                         Войти
                     </Button>
                 </Form.Item>
