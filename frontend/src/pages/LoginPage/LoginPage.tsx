@@ -1,6 +1,6 @@
 import { classNames } from "@/utils/lib";
 import { Typography } from "antd";
-import { LoginForm } from "@/components/LoginForm/LoginForm";
+import { LoginForm } from "@/components/LoginForm";
 import "./LoginPage.scss";
 
 const { Title } = Typography;
