@@ -12,6 +12,9 @@ export const userSlice = createSlice({
         setAuthData: (state, action: PayloadAction<User>) => {
             state.authData = action.payload;
         },
+        initAuthData: (state) => {
+            state._inited = true;
+        },
         logout: (state) => {
             state.authData = undefined;
             // TODO: remove user data

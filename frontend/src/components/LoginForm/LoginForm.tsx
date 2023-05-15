@@ -3,6 +3,10 @@ import cls from "./LoginForm.module.scss";
 import { useCallback } from "react";
 import { Button, Form, Input, Typography } from "antd";
 import { HStack } from "@/components/ui/Stack/HStack/HStack";
+import { useAppDispatch } from "@/utils/hooks";
+import { userActions } from "@/store/user/userSlice";
+import { RoutePath } from "@/utils/consts/router";
+import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -11,10 +15,13 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ className }: LoginFormProps) => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const onFinishHandler = useCallback((values: any) => {
-        console.log("success", values);
-    }, []);
+    const onFinishHandler = useCallback(() => {
+        dispatch(userActions.initAuthData());
+        navigate(RoutePath.management);
+    }, [dispatch, navigate]);
 
     const onFinishFailedHandler = useCallback((errorInfo: any) => {
         console.log(errorInfo);

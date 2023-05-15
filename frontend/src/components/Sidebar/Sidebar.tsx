@@ -25,7 +25,7 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem(<Link to={RoutePath.management}>Управление</Link>, "1", <PieChartOutlined />),
-    getItem(<Link to={RoutePath.login}>Управление</Link>, "2", <PieChartOutlined />),
+    getItem(<Link to={RoutePath.planning}>Планирование</Link>, "2", <PieChartOutlined />),
 ];
 
 interface sidebarProps {
