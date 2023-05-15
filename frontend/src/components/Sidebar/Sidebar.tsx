@@ -1,5 +1,4 @@
 import { Button, Layout, Menu, MenuProps } from "antd";
-import { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined } from "@ant-design/icons";
 import "./sidebar.scss";
 import { HStack } from "@/components/ui";
@@ -29,8 +28,13 @@ const items: MenuItem[] = [
     getItem(<Link to={RoutePath.login}>Управление</Link>, "2", <PieChartOutlined />),
 ];
 
-export const Sidebar = () => {
-    const [collapsed, setCollapsed] = useState(false);
+interface sidebarProps {
+    collapsed: boolean;
+    setCollapsed: (collapsed: boolean) => void;
+}
+
+export const Sidebar = (props: sidebarProps) => {
+    const { collapsed, setCollapsed } = props;
 
     return (
         <Sider

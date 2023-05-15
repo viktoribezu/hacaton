@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { Layout } from "antd";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 
@@ -10,11 +10,12 @@ interface MainLayoutProps {
 
 export const MainLayout = (props: MainLayoutProps) => {
     const { content } = props;
+    const [collapsed, setCollapsed] = useState(false);
 
     return (
         <Layout className={"main__layout"} style={{ minHeight: "100vh" }}>
-            <Sidebar />
-            <Layout className="site-layout" style={{ marginLeft: 200 }}>
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <Layout className="site-layout" style={{ marginLeft: collapsed ? 80 : 200 }}>
                 <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
                     {content}
                 </Content>
