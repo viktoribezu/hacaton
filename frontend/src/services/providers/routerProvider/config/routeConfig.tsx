@@ -9,7 +9,12 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.MANAGEMENT]: {
         path: RoutePath.management,
-        element: <div>qwnkjadkjsadkjas</div>,
+        element: <div>Management page</div>,
+        authOnly: true,
+    },
+    [AppRoutes.PLANNING]: {
+        path: RoutePath.planning,
+        element: <div>Planing page</div>,
         authOnly: true,
     },
     // last
