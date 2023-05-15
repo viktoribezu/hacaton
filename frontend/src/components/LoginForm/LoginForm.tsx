@@ -31,6 +31,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
                 onFinishFailed={onFinishFailedHandler}
             >
                 <Form.Item
+                    label={"Логин"}
                     name="username"
                     rules={[{ required: true, message: "Введите Ваш логин!" }]}
                 >

@@ -2,9 +2,9 @@ import React, { memo, Suspense, useCallback } from "react";
 import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "./RequireAuth";
 import { AppRoutesProps } from "@/types/router";
-import { routeConfig } from "@/services/providers";
+import { getAuthOnlyRoutes } from "@/services/providers/routerProvider/config/routeConfig";
 
-const AppRouter = () => {
+const AppRouter = ({ authOnly }: {authOnly: boolean}) => {
 
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {
         // Элемент оборачиваем в suspense
@@ -16,16 +16,17 @@ const AppRouter = () => {
 
         return (
             <Route
+                index={route.indexRoute}
                 key={route.path}
                 path={route.path}
-                element={route.authOnly ? <RequireAuth>{element}</RequireAuth> : element}
+                element={route.authOnly ? <RequireAuth isAuth={authOnly}>{element}</RequireAuth> : element}
             />
         );
-    }, []);
+    }, [authOnly]);
 
     return (
         <Routes>
-            {Object.values(routeConfig).map(renderWithWrapper)}
+            {getAuthOnlyRoutes(authOnly).map(renderWithWrapper)}
         </Routes>
     );
 };
