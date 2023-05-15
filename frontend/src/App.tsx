@@ -1,11 +1,11 @@
 import { classNames } from "@/utils/lib";
-import { LoginPage } from "@/pages/LoginPage/LoginPage";
+import { AppRouter } from "@/services/providers";
 
 export const App = () => {
 
     return (
         <div className={classNames("app")}>
-            <LoginPage />
+            <AppRouter />
         </div>
     );
 };
