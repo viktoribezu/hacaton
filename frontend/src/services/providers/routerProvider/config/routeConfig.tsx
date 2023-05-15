@@ -7,9 +7,19 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.login,
         element: <LoginPage />,
     },
+    [AppRoutes.MANAGEMENT]: {
+        path: RoutePath.management,
+        element: <div>qwnkjadkjsadkjas</div>,
+        authOnly: true,
+    },
     // last
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,
         element: <NotFoundPage />,
+        authOnly: true
     }
+};
+
+export const getAuthOnlyRoutes = (authOnly: boolean) => {
+    return Object.values(routeConfig).filter((route: AppRoutesProps) => Boolean(route.authOnly) === authOnly);
 };
