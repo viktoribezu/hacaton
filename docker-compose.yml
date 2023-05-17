@@ -14,6 +14,8 @@ services:
         max-size: "20m"
     env_file:
       - envs/database.env
+    restart:
+      on-failure
     networks:
       - pgdb
 
@@ -43,6 +45,8 @@ services:
       - postgres_db
     env_file:
       - envs/database.env
+    restart:
+      on-failure
     networks:
       - pgdb
       - front_back
@@ -54,6 +58,8 @@ services:
       - postgres_db
     env_file:
       - envs/database.env
+    restart:
+      on-failure
     networks:
       - pgdb
 
@@ -64,6 +70,8 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    restart:
+      on-failure
     networks:
       - front_back
 
