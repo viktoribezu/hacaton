@@ -3,12 +3,13 @@ import { AppRouter } from "@/services/providers";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { useSelector } from "react-redux";
 import { getUserInited } from "@/store/user/userSelectors";
+import { UnauthorizedAppRouter } from "@/services/providers/routerProvider/ui/UnauthorizedAppRouter";
+import "@/assets/styles/global.scss";
 
 export const App = () => {
     
     const isAuth = useSelector(getUserInited);
 
-    // TODO: Исправить редирект (Можно открыть логин форму в контент части)
     if (isAuth) {
         return (
             <MainLayout content={<AppRouter />} />
@@ -17,7 +18,7 @@ export const App = () => {
 
     return (
         <div className={classNames("app")}>
-            <AppRouter />
+            <UnauthorizedAppRouter />
         </div>
     );
 };

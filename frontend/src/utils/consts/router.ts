@@ -1,5 +1,4 @@
 export enum AppRoutes {
-    LOGIN = "login",
     MANAGEMENT = "management",
     PLANNING = "planning",
     // RESET_PASSWORD = "reset_password",
@@ -8,7 +7,6 @@ export enum AppRoutes {
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-    [AppRoutes.LOGIN]: "/login",
     [AppRoutes.PLANNING]: "/planning",
     [AppRoutes.MANAGEMENT]: "/management",
     // [AppRoutes.RESET_PASSWORD]: "/reset_password",
