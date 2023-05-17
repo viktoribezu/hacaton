@@ -1,0 +1,19 @@
+.ant-layout-sider.sidebar {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.demo-logo-vertical {
+  height: 32px;
+  background: rgba(0,0,0,.2);
+  border-radius: 6px;
+  width: 100%;
+}
+
+.sidebar__header {
+  padding: 16px;
+}

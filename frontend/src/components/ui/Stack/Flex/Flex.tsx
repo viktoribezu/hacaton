@@ -22,7 +22,7 @@ export interface FlexProps {
 }
 
 const justifyClasses: Record<FlexJustify, string> = {
-    center: cls.jusityCenter,
+    center: cls.justifyCenter,
     between: cls.justifyBetween,
     start: cls.justifyStart,
     end: cls.justifyEnd
@@ -73,8 +73,6 @@ export const Flex = memo((props: FlexProps) => {
         directionClasses[direction],
         gap && gapClasses[gap]
     ];
-
-    console.log(cls.flex);
 
     return (
         <div className={classNames(cls.flex, mods, classes)}>
