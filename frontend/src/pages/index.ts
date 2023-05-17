@@ -5,3 +5,7 @@ export {
 export {
     NotFoundPage
 } from "./NotFoundPage/NotFoundPage";
+
+export {
+    ManagementPage
+} from "./ManagementPage/ManagementPage";

@@ -1,15 +1,11 @@
 import { AppRoutes, RoutePath } from "@/utils/consts/router";
 import { AppRoutesProps } from "@/types/router";
-import { LoginPage, NotFoundPage } from "@/pages";
+import { ManagementPage, NotFoundPage } from "@/pages";
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
-    [AppRoutes.LOGIN]: {
-        path: RoutePath.login,
-        element: <LoginPage />,
-    },
     [AppRoutes.MANAGEMENT]: {
         path: RoutePath.management,
-        element: <div>Management page</div>,
+        element: <ManagementPage />,
         authOnly: true,
     },
     [AppRoutes.PLANNING]: {
@@ -23,8 +19,4 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <NotFoundPage />,
         authOnly: true
     }
-};
-
-export const getAuthOnlyRoutes = (authOnly: boolean) => {
-    return Object.values(routeConfig).filter((route: AppRoutesProps) => Boolean(route.authOnly) === authOnly);
 };

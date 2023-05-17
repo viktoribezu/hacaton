@@ -5,3 +5,7 @@ export {
 export {
     HStack
 } from "./Stack/HStack/HStack";
+
+export {
+    Module
+} from "./Module/Module";
