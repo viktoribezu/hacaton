@@ -3,7 +3,59 @@ import { ManagementSchema } from "./ManagementSchema";
 
 const initialState: ManagementSchema = {
     selectedRows: [],
-    selectedRowsKeys: []
+    selectedRowsKeys: [],
+    objectSource: [
+        {
+            key: 1,
+            name: "Mike",
+            age: 32,
+            address: "10 Downing Street",
+            cadastralNumber: "2",
+            objectType: "Жилой дом",
+            exploitationYear: "2023",
+            condition: "Хорошее",
+        },
+        {
+            key: 2,
+            name: "John",
+            age: 42,
+            address: "10 Downing Street",
+            cadastralNumber: "2",
+            objectType: "Жилой дом",
+            exploitationYear: "2023",
+            condition: "Хорошее",
+        },
+        {
+            key: 3,
+            name: "Mike",
+            age: 32,
+            address: "10 Downing Street",
+            cadastralNumber: "2",
+            objectType: "Жилой дом",
+            exploitationYear: "2023",
+            condition: "Хорошее",
+        },
+        {
+            key: 4,
+            name: "John",
+            age: 42,
+            address: "10 Downing Street",
+            cadastralNumber: "2",
+            objectType: "Жилой дом",
+            exploitationYear: "2023",
+            condition: "Хорошее",
+        },
+        {
+            key: 5,
+            name: "Mike",
+            age: 32,
+            address: "10 Downing Street",
+            cadastralNumber: "2",
+            objectType: "Жилой дом",
+            exploitationYear: "2023",
+            condition: "Хорошее",
+        },
+    ]
 };
 
 export const managementSlice = createSlice({
@@ -11,9 +63,13 @@ export const managementSlice = createSlice({
     initialState,
     reducers: {
         setSelectedObject: (state, action) => {
-            console.log(action.payload);
             state.selectedRows = action.payload.selectedRows;
             state.selectedRowsKeys = action.payload.selectedRowsKeys;
+        },
+        deleteObjects: (state) => {
+            state.objectSource = state.objectSource.filter((object) => !state.selectedRowsKeys.includes(object.key));
+            state.selectedRowsKeys = [];
+            state.selectedRows = [];
         }
     },
 });

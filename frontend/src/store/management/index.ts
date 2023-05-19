@@ -5,3 +5,8 @@ export { ManagementSchema, ManagementObject };
 export {
     managementAction,
 } from "./managementSlice";
+
+export {
+    getSelectedRowsKeys,
+    getObjectSourceData
+} from "./managementSelectors";

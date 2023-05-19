@@ -1,12 +1,31 @@
 import { Module } from "@/components/ui";
-import { Button, Checkbox, Input, Space } from "antd";
+import { Button, Checkbox, Input, Modal, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { getSelectedRowsKeys } from "@/store/management/managementSelectors";
+import { useCallback, useState } from "react";
+import { useAppDispatch } from "@/utils/hooks";
+import { getSelectedRowsKeys, managementAction } from "@/store/management";
 
 export const ManagementFilterGroup = () => {
-
+    const dispatch = useAppDispatch();
+    
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
     const selectedRowsKeys = useSelector(getSelectedRowsKeys);
+
+    const deleteClickHandler = useCallback(() => {
+        setIsOpenDeleteModal(true);
+    }, []);
+
+    const onConfirmHandler = useCallback(() => {
+        // TODO: Запрос на удаление объекта
+        setConfirmLoading(true);
+        setTimeout(() => {
+            dispatch(managementAction.deleteObjects());
+            setIsOpenDeleteModal(false);
+            setConfirmLoading(false);
+        }, 2000);
+    }, [dispatch]);
 
     return (
         <>
@@ -24,7 +43,7 @@ export const ManagementFilterGroup = () => {
                         <Input placeholder="Важность проблемы" suffix={<SearchOutlined />} />
                         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
                         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
-                        <Button disabled={!selectedRowsKeys.length}>Удалить</Button>
+                        <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </Space>
                     <Space size={"large"}>
                         <Checkbox>Все</Checkbox>
@@ -34,6 +53,15 @@ export const ManagementFilterGroup = () => {
                     </Space>
                 </Space>
             </Module>
+            <Modal
+                title={"Подтверждение удаления"}
+                open={isOpenDeleteModal}
+                confirmLoading={confirmLoading}
+                onCancel={() => setIsOpenDeleteModal(false)}
+                onOk={onConfirmHandler}
+            >
+                <p>Вы действительно хотите удалить объект?</p>
+            </Modal>
         </>
     );
 };

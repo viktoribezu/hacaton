@@ -1,5 +1,5 @@
 export interface ManagementObject {
-    key: React.Key;
+    key: number;
     name: string;
     age: number;
     address: string;
@@ -11,5 +11,6 @@ export interface ManagementObject {
 
 export interface ManagementSchema {
     selectedRowsKeys: number[];
-    selectedRows: ManagementObject[]
+    selectedRows: ManagementObject[];
+    objectSource: ManagementObject[];
 }
