@@ -1,7 +1,18 @@
 import { Module } from "@/components/ui";
 import { Table } from "antd";
 
-const dataSource = [
+interface DataType {
+    key: React.Key;
+    name: string;
+    age: number;
+    address: string;
+    cadastralNumber: string;
+    objectType: string;
+    exploitationYear: string;
+    condition: string;
+}
+
+const dataSource: DataType[] = [
     {
         key: "1",
         name: "Mike",
@@ -11,7 +22,6 @@ const dataSource = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        adress: "Moscow"
     },
     {
         key: "2",
@@ -83,11 +93,18 @@ const columns = [
     }
 ];
 
+const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
+    }
+};
+
 export const ManagementTable = () => {
 
     return (
         <Module>
             <Table
+                rowSelection={{ ...rowSelection }}
                 columns={columns}
                 dataSource={dataSource}
             />
