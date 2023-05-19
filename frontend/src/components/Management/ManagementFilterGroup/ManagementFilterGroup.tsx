@@ -1,8 +1,12 @@
 import { Module } from "@/components/ui";
 import { Button, Checkbox, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { getSelectedRowsKeys } from "@/store/management/managementSelectors";
 
 export const ManagementFilterGroup = () => {
+
+    const selectedRowsKeys = useSelector(getSelectedRowsKeys);
 
     return (
         <>
@@ -20,6 +24,7 @@ export const ManagementFilterGroup = () => {
                         <Input placeholder="Важность проблемы" suffix={<SearchOutlined />} />
                         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
                         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
+                        <Button disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </Space>
                     <Space size={"large"}>
                         <Checkbox>Все</Checkbox>
