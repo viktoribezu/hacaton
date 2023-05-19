@@ -14,6 +14,8 @@ services:
         max-size: "20m"
     env_file:
       - envs/database.env
+    volumes:
+      - ./scripts/create_ml_user.sh:/docker-entrypoint-initdb.d/create_ml_user.sh
     restart:
       on-failure
     networks:
