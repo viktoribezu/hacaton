@@ -1,61 +1,8 @@
 import { Module } from "@/components/ui";
 import { Table } from "antd";
-import { managementAction } from "@/store/management";
 import { useAppDispatch } from "@/utils/hooks";
-import { ManagementObject } from "@/store/management";
-
-const dataSource: ManagementObject[] = [
-    {
-        key: "1",
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-    },
-    {
-        key: "2",
-        name: "John",
-        age: 42,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-    },
-    {
-        key: "3",
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-    },
-    {
-        key: "4",
-        name: "John",
-        age: 42,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-    },
-    {
-        key: "5",
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-    },
-];
+import { ManagementObject, getObjectSourceData, managementAction } from "@/store/management";
+import { useSelector } from "react-redux";
 
 const columns = [
     {
@@ -87,6 +34,7 @@ const columns = [
 
 export const ManagementTable = () => {
     const dispatch = useAppDispatch();
+    const dataSource = useSelector(getObjectSourceData);
 
     const rowSelection = {
         onChange: (selectedRowsKeys: React.Key[], selectedRows: ManagementObject[]) => {
