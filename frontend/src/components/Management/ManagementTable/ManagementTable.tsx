@@ -1,18 +1,10 @@
 import { Module } from "@/components/ui";
 import { Table } from "antd";
+import { managementAction } from "@/store/management";
+import { useAppDispatch } from "@/utils/hooks";
+import { ManagementObject } from "@/store/management";
 
-interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-    cadastralNumber: string;
-    objectType: string;
-    exploitationYear: string;
-    condition: string;
-}
-
-const dataSource: DataType[] = [
+const dataSource: ManagementObject[] = [
     {
         key: "1",
         name: "Mike",
@@ -93,13 +85,15 @@ const columns = [
     }
 ];
 
-const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
-    }
-};
-
 export const ManagementTable = () => {
+    const dispatch = useAppDispatch();
+
+    const rowSelection = {
+        onChange: (selectedRowsKeys: React.Key[], selectedRows: ManagementObject[]) => {
+            dispatch(managementAction.setSelectedObject({ selectedRowsKeys, selectedRows }));
+        }
+    };
+
 
     return (
         <Module>
