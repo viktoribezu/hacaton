@@ -1,8 +1,10 @@
 import { Module } from "@/components/ui";
-import { Table } from "antd";
+import { Modal, Table } from "antd";
 import { useAppDispatch } from "@/utils/hooks";
-import { ManagementObject, getObjectSourceData, managementAction } from "@/store/management";
+import { getObjectSourceData, managementAction, ManagementObject } from "@/store/management";
 import { useSelector } from "react-redux";
+import { ManagementEditResultModal } from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
+import { useState } from "react";
 
 const columns = [
     {
@@ -35,6 +37,8 @@ const columns = [
 export const ManagementTable = () => {
     const dispatch = useAppDispatch();
     const dataSource = useSelector(getObjectSourceData);
+    const [editResultModalVisible, setEditResultModalVisible] = useState<boolean>(false);
+    const [selectedEditableObject, setSelectedEditableObject] = useState<ManagementObject | undefined>(undefined);
 
     const rowSelection = {
         onChange: (selectedRowsKeys: React.Key[], selectedRows: ManagementObject[]) => {
@@ -42,14 +46,35 @@ export const ManagementTable = () => {
         }
     };
 
+    const onRowClickHandler = (record: ManagementObject) => {
+        setSelectedEditableObject(record);
+        setEditResultModalVisible(true);
+    };
+
 
     return (
-        <Module>
-            <Table
-                rowSelection={{ ...rowSelection }}
-                columns={columns}
-                dataSource={dataSource}
-            />
-        </Module>
+        <>
+            <Module>
+                <Table
+                    onRow={(record) => {
+                        return {
+                            onClick: () => onRowClickHandler(record)
+                        };
+                    }}
+                    rowSelection={{ ...rowSelection }}
+                    columns={columns}
+                    dataSource={dataSource}
+                />
+            </Module>
+            <Modal
+                width={"auto"}
+                onCancel={() => setEditResultModalVisible(false)}
+                open={editResultModalVisible}
+            >
+                <ManagementEditResultModal
+                    selectedObject={selectedEditableObject}
+                />
+            </Modal>
+        </>
     );
 };
