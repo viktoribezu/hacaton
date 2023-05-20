@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getUserInited } from "@/store/user/userSelectors";
 import { UnauthorizedAppRouter } from "@/services/providers/routerProvider/ui/UnauthorizedAppRouter";
 import "@/assets/styles/global.scss";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const App = () => {
     
