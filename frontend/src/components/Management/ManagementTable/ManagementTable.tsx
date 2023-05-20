@@ -1,4 +1,3 @@
-import { Module } from "@/components/ui";
 import { Modal, Table } from "antd";
 import { useAppDispatch } from "@/utils/hooks";
 import { getObjectSourceData, managementAction, ManagementObject } from "@/store/management";
@@ -54,18 +53,16 @@ export const ManagementTable = () => {
 
     return (
         <>
-            <Module>
-                <Table
-                    onRow={(record) => {
-                        return {
-                            onClick: () => onRowClickHandler(record)
-                        };
-                    }}
-                    rowSelection={{ ...rowSelection }}
-                    columns={columns}
-                    dataSource={dataSource}
-                />
-            </Module>
+            <Table
+                onRow={(record) => {
+                    return {
+                        onClick: () => onRowClickHandler(record)
+                    };
+                }}
+                rowSelection={{ ...rowSelection }}
+                columns={columns}
+                dataSource={dataSource}
+            />
             <Modal
                 width={"auto"}
                 onCancel={() => setEditResultModalVisible(false)}
