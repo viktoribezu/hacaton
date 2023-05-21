@@ -78,7 +78,6 @@ def extract_data(**kwargs):
     list_files = ti.xcom_pull(key='files', task_ids=['_wait_for_xlsx'])[0]
     problem_type_dict = {}
     unom_area_dict = {}
-    unom_local_id_dict = {}
     unom_area_district_dict = {}
     name_of_work_local_id_dict = {}
     data = {}
@@ -93,13 +92,13 @@ def extract_data(**kwargs):
                            'col_770': 'col_770_id',
                            'col_775': 'col_775_id',
                            'col_781': 'col_781_id',
-                           'col_103506': 'col_103506_id',
                            'col_2156': 'col_2156_id',
                            'col_2463': 'col_2463_id',
                            'col_3163': 'col_3163_id',
-                           'col_3243': 'col_3243_id'},
+                           'col_3243': 'col_3243_id',
+                           'col_103506': 'col_103506_id'},
                           axis=1, inplace=True)
-            unom_set = {'set' :reader.col_782.astype(int).values.tolist()}
+            unom_set = {'set': reader.col_782.astype(int).values.tolist()}
             reader['local_id'] = reader['local_id'].astype(int).astype(str)
             reader['col_758_id'] = reader['col_758_id'].astype(str)
             reader['col_769_id'] = reader['col_769_id'].astype(str)
@@ -267,6 +266,7 @@ def transform_data(**kwargs):
     unom_set = ti.xcom_pull(key='unom_set', task_ids=['extract_data'])[0]['set']
     unom_area_district_dict = ti.xcom_pull(key='unom_area_district_dict', task_ids=['extract_data'])[0]
     name_of_work_local_id_dict = ti.xcom_pull(key='name_of_work_local_id_dict', task_ids=['extract_data'])[0]
+
     final_data = {}
     for model, file_data_taken in data_taken.items():
         if model == "Object":
@@ -292,7 +292,10 @@ def transform_data(**kwargs):
                 lambda x: str(x) if x in unom_set else None
             ).astype(str)
             file_data_taken['date_end'] = file_data_taken['date_end'].astype(str)
-            file_data_taken = file_data_taken.fillna(np.nan).replace([np.nan], [None]).replace(['nan'], [None]).replace(['None'], [None])
+            file_data_taken = file_data_taken.fillna(np.nan)\
+                .replace([np.nan], [None])\
+                .replace(['nan'], [None])\
+                .replace(['None'], [None])
             file_data_taken = file_data_taken.to_dict('list')
         elif model == "TypeOfWork":
             file_data_taken = pd.DataFrame(file_data_taken)
