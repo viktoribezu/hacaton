@@ -4,7 +4,6 @@ import { ManagementObject } from "@/store/management";
 
 export const exportData = <T>(url: string, itemsMocked: T[] | ManagementObject[] = mockedObject) => {
     // set loading
-    const next = __API__ + url;
     // TODO: Добавить запрос для получения данных
 
     const worksheet = utils.json_to_sheet(itemsMocked);

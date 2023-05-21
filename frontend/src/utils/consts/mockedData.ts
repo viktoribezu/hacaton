@@ -1,5 +1,3 @@
-import { ManagementObject } from "@/store/management";
-
 export const mockedObject = [
     {
         key: 1,
