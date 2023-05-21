@@ -1,16 +1,16 @@
-version: '3'
+version: '3.4'
 
 x-airflow-common:
   &airflow-common
   build:
     context: ./airflow/
     args:
-      AIRFLOW_IMAGE: apache/airflow:2.0.2
+      AIRFLOW_IMAGE: apache/airflow:2.5.3
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
-    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres_airflow/airflow
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres_airflow/airflow
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
@@ -25,6 +25,11 @@ x-airflow-common:
   depends_on:
     - postgres_airflow
     - redis
+  env_file:
+    - envs/database.env
+  networks:
+    - airflow
+    - pgdb
 services:
   postgres_db:
     container_name: postgres_db
@@ -113,6 +118,8 @@ services:
       test: [ "CMD", "pg_isready", "-U", "airflow" ]
       interval: 5s
       retries: 5
+    networks:
+      - airflow
 
   redis:
     image: redis:latest
@@ -124,6 +131,8 @@ services:
       timeout: 30s
       retries: 50
     restart: always
+    networks:
+      - airflow
 
   airflow-webserver:
     <<: *airflow-common
@@ -146,7 +155,6 @@ services:
       timeout: 10s
       retries: 5
     restart: always
-
   airflow-worker:
     <<: *airflow-common
     command: celery worker
@@ -158,7 +166,6 @@ services:
       timeout: 10s
       retries: 5
     restart: always
-
   airflow-init:
     <<: *airflow-common
     command: version
@@ -168,7 +175,6 @@ services:
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
-
   flower:
     <<: *airflow-common
     command: celery flower
@@ -184,3 +190,5 @@ services:
 networks:
   pgdb:
   front_back:
+  airflow:
+    driver: bridge
