@@ -5,3 +5,7 @@ export {
 export type {
     Mods
 } from "./classNames/classNames";
+
+export {
+    exportData
+} from "./exportData/exportData";
