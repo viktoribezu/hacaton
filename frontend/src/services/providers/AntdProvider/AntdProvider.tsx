@@ -12,6 +12,13 @@ export const AntdProvider = ({ children }: AntdProviderProps) => {
                 token: {
                     colorPrimary: "#2CA983",
                 },
+                components: {
+                    Button: {
+                        colorLink: "#2CA983",
+                        colorLinkHover: "#2CA983"
+
+                    }
+                }
             }}
         >
             {children}
