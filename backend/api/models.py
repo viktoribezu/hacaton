@@ -1,11 +1,14 @@
 from datetime import datetime, timedelta
 
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractUser
+from authemail.models import EmailUserManager, EmailAbstractUser
 
 from django.db import models
+
+
+class Users(EmailAbstractUser):
+    objects = EmailUserManager()
 
 
 class BaseModel(models.Model):
