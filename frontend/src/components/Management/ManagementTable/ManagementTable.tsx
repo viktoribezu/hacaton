@@ -64,7 +64,7 @@ export const ManagementTable = () => {
                 dataSource={dataSource}
             />
             <Modal
-                width={"auto"}
+                width={"fit-content"}
                 onCancel={() => setEditResultModalVisible(false)}
                 open={editResultModalVisible}
             >

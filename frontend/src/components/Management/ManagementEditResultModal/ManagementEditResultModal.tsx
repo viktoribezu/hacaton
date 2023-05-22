@@ -1,11 +1,25 @@
 import { ManagementObject } from "@/store/management";
-import { DatePicker, Table } from "antd";
+import { Cascader, DatePicker, Table } from "antd";
 import dayjs from "dayjs";
 import { DateFormat } from "@/utils/consts/Dates";
+import "./ManagementEditResultModal.scss";
+import { DefaultOptionType } from "antd/es/cascader";
+import { CascaderOption } from "@/types/AntdTypes";
 
 interface ManagementEditResultModalProps {
     selectedObject?: ManagementObject;
 }
+
+const options: CascaderOption[] = [
+    {
+        value: "zhejiang",
+        label: "Zhejiang",
+    },
+    {
+        value: "jiangsu",
+        label: "Jiangsu",
+    },
+];
 
 const columns = [
     {
@@ -40,8 +54,21 @@ const columns = [
         title: "ИСПОЛНИТЕЛЬ",
         dataIndex: "executor",
         key: "executor",
+        render: (value: string) => (
+            <Cascader
+                options={options}
+                placeholder="Please select"
+                showSearch={{ filter }}
+                defaultValue={[value]}
+            />
+        )
     }
 ];
+
+const filter = (inputValue: string, path: DefaultOptionType[]) =>
+    path.some(
+        (option) => (option.label as string).toLowerCase().indexOf(inputValue.toLowerCase()) > -1,
+    );
 
 const selectedObjectMock = [
     {
@@ -87,7 +114,7 @@ const selectedObjectMock = [
         start_fix_date: "2001.01.01",
         update_datefix_at: "2001.01.01",
         status_of_work: "Жилой дом",
-        executor: "2023",
+        executor: "Zhejiang",
     },
 ];
 
@@ -97,6 +124,7 @@ export const ManagementEditResultModal = (props: ManagementEditResultModalProps)
     return (
         <>
             <Table
+                className={"management__result"}
                 dataSource={selectedObjectMock}
                 columns={columns}
             />

@@ -1,10 +1,11 @@
-import { Module } from "@/components/ui";
+import { HStack, Module } from "@/components/ui";
 import { Button, Checkbox, Input, Modal, Space } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { DownloadOutlined, SearchOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
 import { useAppDispatch } from "@/utils/hooks";
-import { getSelectedRowsKeys, managementAction } from "@/store/management";
+import { getSelectedRowsKeys, managementAction, ManagementObject } from "@/store/management";
+import { exportData } from "@/utils/lib/exportData/exportData";
 
 export const ManagementFilterGroup = () => {
     const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ export const ManagementFilterGroup = () => {
     return (
         <>
             <Module>
-                <Space size={"middle"} direction={"vertical"}>
+                <Space size={"middle"} style={{ width: "100%" }} direction={"vertical"}>
                     <Space size={"large"}>
                         <Input placeholder="Тип строения" suffix={<SearchOutlined />} />
                         <Input placeholder="Адрес" suffix={<SearchOutlined />} />
@@ -45,12 +46,20 @@ export const ManagementFilterGroup = () => {
                         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
                         <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </Space>
-                    <Space size={"large"}>
-                        <Checkbox>Все</Checkbox>
-                        <Checkbox>В статусе ожидания</Checkbox>
-                        <Checkbox>Запланированные</Checkbox>
-                        <Checkbox>Сделанные</Checkbox>
-                    </Space>
+                    <HStack max justify={"between"}>
+                        <Space size={"large"}>
+                            <Checkbox>Все</Checkbox>
+                            <Checkbox>В статусе ожидания</Checkbox>
+                            <Checkbox>Запланированные</Checkbox>
+                            <Checkbox>Сделанные</Checkbox>
+                        </Space>
+                        <Button
+                            icon={<DownloadOutlined />}
+                            onClick={() => exportData<ManagementObject>("/objects")}
+                        >
+                            Скачать все
+                        </Button>
+                    </HStack>
                 </Space>
             </Module>
             <Modal
