@@ -18,7 +18,8 @@ from .models import (MCDCategory,
                      Problem,
                      Predict,
                      TaskInWork,
-                     TypeOfWork)
+                     TypeOfWork,
+                     Users)
 
 
 class MyUserAdmin(EmailUserAdmin):
