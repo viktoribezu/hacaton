@@ -19,26 +19,9 @@ services:
     networks:
       - pgdb
 
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - 5050:80
-    depends_on:
-      - postgres_db
-    networks:
-      - pgdb
-
   backend:
     container_name: backend
-    build:
-      context: backend/
-    command: bash -c "python /app/manage.py makemigrations && python /app/manage.py migrate --noinput && python /app/manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - ./backend/:/app
+    image: { { env.BACKEND_IMAGE } }
     ports:
       - 8000:8000
     depends_on:
@@ -52,11 +35,7 @@ services:
       - front_back
 
   ml:
-    container_name: ml
-    build:
-      context: ml/
-    volumes:
-      - ./ml/:/app
+    image: {{ env.ML_IMAGE }}
     depends_on:
       - postgres_db
     env_file:
@@ -67,11 +46,7 @@ services:
       - pgdb
 
   frontend:
-    container_name: frontend
-    build:
-      context: frontend/
-    volumes:
-      - ./frontend/:/app
+    image: {{ env.FRONTEND_IMAGE }}
     ports:
       - 3000:3000
     depends_on:

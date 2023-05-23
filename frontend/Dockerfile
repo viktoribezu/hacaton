@@ -1,8 +1,8 @@
 FROM node:18
 
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir /app
 ADD . /app
+WORKDIR /app/frontend
 
 RUN npm install
 RUN npm run build:prod

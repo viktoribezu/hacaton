@@ -1,7 +1,7 @@
 name: Push on server
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "add_cicd" ]
   workflow_dispatch:
     inputs:
       reason:
@@ -83,3 +83,32 @@ jobs:
         file: ./ml/Dockerfile
         push: true
         tags: ${{ env.ML_IMAGE }}
+  update-yc:
+    runs-on: ubuntu-latest
+    needs: [ build-backend, build-frontend, build-ml ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy COI VM
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v1.0.1
+        env:
+          FRONTEND_IMAGE: ${{ env.FRONTEND_IMAGE }}
+          BACKEND_IMAGE: ${{ env.BACKEND_IMAGE }}
+          ML_IMAGE: ${{ env.ML_IMAGE }}
+          YC_VM_SSH: ${{ secrets.YC_VM_SSH }}
+          YC_VM_USERNAME: ${{ secrets.YC_VM_USERNAME }}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          VM-name: ${{ secrets.YC_VM_NAME }}
+          vm-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+          vm-cores: 2
+          vm-platform-id: 'standard-v2'
+          vm-memory: 512Mb
+          vm-disk-size: 30Gb
+          vm-core-fraction: 5
+          vm-subnet-id: ${{ secrets.YC_SUBNET_ID }}
+          docker-compose-path: './.github/workflows/yandex-cloud/docker-compose.yc.yaml'
+          user-data-path: '/.github/workflows/yandex-cloud/user-data.yaml'
