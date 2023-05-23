@@ -9,8 +9,20 @@ export interface ManagementObject {
     condition: string;
 }
 
+export interface ManagementFilterParams {
+    objectCategory?: string;
+    sourceData?: string;
+    objectArea?: string;
+    startFixDate?: string;
+    finishFixDate?: string;
+    district?: string;
+}
+
 export interface ManagementSchema {
+    isLoading: boolean;
     selectedRowsKeys: number[];
     selectedRows: ManagementObject[];
     objectSource: ManagementObject[];
+    filterGroup: ManagementFilterParams;
+    error?: string;
 }
