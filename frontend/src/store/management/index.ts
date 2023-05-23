@@ -8,5 +8,12 @@ export {
 
 export {
     getSelectedRowsKeys,
-    getObjectSourceData
+    getObjectSourceData,
+    getManagementFilterGroupFinishFixDate,
+    getManagementFilterObjectCategory,
+    getManagementFilterGroupSourceData,
+    getManagementFilterGroupStartFixDate,
+    getManagementFilterGroupDistrict,
+    getManagementFilterGroupObjectArea,
+    getObjectIsLoading
 } from "./managementSelectors";
