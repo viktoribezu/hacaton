@@ -8,7 +8,7 @@ const { Title } = Typography;
 export const LoginPage = () => {
 
     return (
-        <div className={classNames("loginPage", {}, [])}>
+        <div className={classNames("centeredForm", {}, [])}>
             <Title level={2}>Авторизация пользователя</Title>
             <LoginForm />
         </div>
