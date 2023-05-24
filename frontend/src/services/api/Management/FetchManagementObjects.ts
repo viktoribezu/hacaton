@@ -13,7 +13,7 @@ export const fetchManagementObjects = createAsyncThunk<
             const { extra, rejectWithValue } = thunkAPI;
 
             try {
-                const response = await extra.api.get<ManagementObject[]>("/task_in_work", {
+                const response = await extra.api.get<ManagementObject[]>("/task_in_work/", {
                     params: {
                         object__adm_area: managementFilterParams.objectCategory,
                         object__district: managementFilterParams.district,

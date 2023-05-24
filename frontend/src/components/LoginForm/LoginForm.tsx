@@ -1,34 +1,32 @@
-import { classNames } from "@/utils/lib";
 import cls from "./LoginForm.module.scss";
 import { useCallback } from "react";
 import { Button, Form, Input, Typography } from "antd";
 import { HStack } from "@/components/ui/Stack/HStack/HStack";
 import { useAppDispatch } from "@/utils/hooks";
 import { userActions } from "@/store/user/userSlice";
-import { RoutePath } from "@/utils/consts/router";
 import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 
-interface LoginFormProps {
-    className?: string
-}
-
-export const LoginForm = ({ className }: LoginFormProps) => {
+export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
-    const onFinishHandler = useCallback(() => {
+    const onFinishHandler = useCallback(({ username, password }: {username: string, password: string}) => {
+        // dispatch(loginByUsername({ username, password }));
         dispatch(userActions.initAuthData());
-        navigate(RoutePath.management);
+        navigate("/management");
     }, [dispatch, navigate]);
 
     const onFinishFailedHandler = useCallback((errorInfo: any) => {
         console.log(errorInfo);
     }, []);
 
+    const goToResetPassword = () => {
+        navigate("/reset-password");
+    };
+
     return (
-        <div className={classNames("loginForm", {}, [className])}>
+        <div>
             <Form
                 name="login"
                 autoComplete="off"
@@ -48,7 +46,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
                     label={
                         <HStack justify={"between"} max>
                             <Text>Пароль</Text>
-                            <Button type={"link"} size={"small"}>
+                            <Button onClick={goToResetPassword} type={"link"} size={"small"}>
                                 Восстановить пароль
                             </Button>
                         </HStack>
