@@ -7,6 +7,7 @@ export interface ManagementObject {
     objectType: string;
     exploitationYear: string;
     condition: string;
+    district: string;
 }
 
 export interface ManagementFilterParams {

@@ -8,6 +8,7 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
+        district: "Московский"
     },
     {
         key: 2,
@@ -18,6 +19,7 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
+        district: "Московский"
     },
     {
         key: 3,
@@ -28,6 +30,7 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
+        district: "Московский"
     },
     {
         key: 4,
@@ -38,6 +41,7 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
+        district: "Московский"
     },
     {
         key: 5,
@@ -48,5 +52,6 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
+        district: "Московский"
     },
 ];

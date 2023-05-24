@@ -1,13 +1,14 @@
 import { ManagementObject } from "@/store/management";
-import { Cascader, DatePicker, Table } from "antd";
+import { Card, Cascader, DatePicker, Descriptions, Table } from "antd";
 import dayjs from "dayjs";
 import { DateFormat } from "@/utils/consts/Dates";
 import "./ManagementEditResultModal.scss";
 import { DefaultOptionType } from "antd/es/cascader";
 import { CascaderOption } from "@/types/AntdTypes";
+import { HStack } from "@/components/ui";
 
 interface ManagementEditResultModalProps {
-    selectedObject?: ManagementObject;
+    selectedObject: ManagementObject | undefined;
 }
 
 const options: CascaderOption[] = [
@@ -123,11 +124,26 @@ export const ManagementEditResultModal = (props: ManagementEditResultModalProps)
 
     return (
         <>
-            <Table
-                className={"management__result"}
-                dataSource={selectedObjectMock}
-                columns={columns}
-            />
+            <HStack gap={16} className={"edit__result-modal"}>
+                <Card size="small" title={selectedObject?.name}  style={{ width: 250 }}>
+                    <Descriptions
+                        column={1}
+                    >
+                        <Descriptions.Item label="Категория объекта">дом</Descriptions.Item>
+                        <Descriptions.Item label="Округ">-</Descriptions.Item>
+                        <Descriptions.Item label="Район">{selectedObject?.district}</Descriptions.Item>
+                        <Descriptions.Item label="Улица">5</Descriptions.Item>
+                        <Descriptions.Item label="Год постройки">2003</Descriptions.Item>
+                        <Descriptions.Item label="UNOM">4359802</Descriptions.Item>
+                    </Descriptions>
+                </Card>
+                <Table
+                    bordered
+                    className={"management__result"}
+                    dataSource={selectedObjectMock}
+                    columns={columns}
+                />
+            </HStack>
         </>
     );
 };
