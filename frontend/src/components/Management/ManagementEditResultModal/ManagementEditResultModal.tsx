@@ -5,7 +5,7 @@ import { DateFormat } from "@/utils/consts/Dates";
 import "./ManagementEditResultModal.scss";
 import { DefaultOptionType } from "antd/es/cascader";
 import { CascaderOption } from "@/types/AntdTypes";
-import { HStack } from "@/components/ui";
+import { HStack, VStack } from "@/components/ui";
 
 interface ManagementEditResultModalProps {
     selectedObject: ManagementObject | undefined;
@@ -63,6 +63,24 @@ const columns = [
                 defaultValue={[value]}
             />
         )
+    }
+];
+
+const problemsColumns = [
+    {
+        title: "Дата когда обращение пришло",
+        dataIndex: "taskDate",
+        key: "taskDate"
+    },
+    {
+        title: "От какого сервиса пришло",
+        dataIndex: "problemOwner",
+        key: "problemOwner",
+    },
+    {
+        title: "Описание причины обращения",
+        dataIndex: "problemDescription",
+        key: "problemDescription"
     }
 ];
 
@@ -124,26 +142,32 @@ export const ManagementEditResultModal = (props: ManagementEditResultModalProps)
 
     return (
         <>
-            <HStack gap={16} className={"edit__result-modal"}>
-                <Card size="small" title={selectedObject?.name}  style={{ width: 250 }}>
-                    <Descriptions
-                        column={1}
-                    >
-                        <Descriptions.Item label="Категория объекта">дом</Descriptions.Item>
-                        <Descriptions.Item label="Округ">-</Descriptions.Item>
-                        <Descriptions.Item label="Район">{selectedObject?.district}</Descriptions.Item>
-                        <Descriptions.Item label="Улица">5</Descriptions.Item>
-                        <Descriptions.Item label="Год постройки">2003</Descriptions.Item>
-                        <Descriptions.Item label="UNOM">4359802</Descriptions.Item>
-                    </Descriptions>
-                </Card>
+            <VStack max className={"edit__result-modal"}>
+                <HStack gap={16}>
+                    <Card size="small" title={selectedObject?.name}  style={{ width: 250 }}>
+                        <Descriptions
+                            column={1}
+                        >
+                            <Descriptions.Item label="Категория объекта">дом</Descriptions.Item>
+                            <Descriptions.Item label="Округ">-</Descriptions.Item>
+                            <Descriptions.Item label="Район">{selectedObject?.district}</Descriptions.Item>
+                            <Descriptions.Item label="Улица">5</Descriptions.Item>
+                            <Descriptions.Item label="Год постройки">2003</Descriptions.Item>
+                            <Descriptions.Item label="UNOM">4359802</Descriptions.Item>
+                        </Descriptions>
+                    </Card>
+                    <Table
+                        bordered
+                        className={"management__result"}
+                        dataSource={selectedObjectMock}
+                        columns={columns}
+                    />
+                </HStack>
                 <Table
                     bordered
-                    className={"management__result"}
-                    dataSource={selectedObjectMock}
-                    columns={columns}
+                    columns={problemsColumns}
                 />
-            </HStack>
+            </VStack>
         </>
     );
 };
