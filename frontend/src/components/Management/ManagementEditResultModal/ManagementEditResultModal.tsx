@@ -1,11 +1,11 @@
 import { ManagementObject } from "@/store/management";
-import { Card, Cascader, DatePicker, Descriptions, Space, Table, Typography } from "antd";
+import { Card, Cascader, DatePicker, Descriptions, Table } from "antd";
 import dayjs from "dayjs";
 import { DateFormat } from "@/utils/consts/Dates";
 import "./ManagementEditResultModal.scss";
 import { DefaultOptionType } from "antd/es/cascader";
 import { CascaderOption } from "@/types/AntdTypes";
-import { HStack, VStack } from "@/components/ui";
+import { HStack } from "@/components/ui";
 
 interface ManagementEditResultModalProps {
     selectedObject: ManagementObject | undefined;
