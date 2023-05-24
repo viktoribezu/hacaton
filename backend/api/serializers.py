@@ -103,17 +103,10 @@ class PredictSerializer(serializers.ModelSerializer):
 
 
 class TaskInWorkSerializer(serializers.ModelSerializer):
-    predict = serializers.SerializerMethodField()
-
     class Meta:
         model = TaskInWork
         fields = '__all__'
         depth = 5
-
-    def get_predict(self, obj):
-        selected_predict = Predict.objects.filter(
-            problem=obj.problem).distinct()
-        return PredictSerializer(selected_predict, many=True).data
 
 
 class TypeOfWorkSerializer(serializers.ModelSerializer):
