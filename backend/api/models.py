@@ -155,7 +155,7 @@ class ProblemType(BaseModel):
 class Problem(BaseModel):
     problem_type = models.ForeignKey(ProblemType, on_delete=models.CASCADE, to_field='local_id')
     date_create = models.DateTimeField("Дата создания во внешней системе")
-    date_close = models.DateTimeField("Дата закрытия")
+    date_close = models.DateTimeField("Дата закрытия", null=True)
     unom = models.IntegerField("UNOM")
     object = models.ForeignKey(Object, on_delete=models.CASCADE, null=True, to_field='col_782')
     date_end = models.DateTimeField("Дата и время завершения события во", null=True)
@@ -165,12 +165,12 @@ class Problem(BaseModel):
 
 
 class Predict(models.Model):
-    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    object = models.ForeignKey(Object, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     planing_date = models.DateTimeField()
 
     def __str__(self):
-        return f"{self.problem.name} {self.planing_date}"
+        return f"{self.object.name} {self.planing_date}"
 
 
 class TypeOfWork(BaseModel):

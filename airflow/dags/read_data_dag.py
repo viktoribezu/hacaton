@@ -60,7 +60,7 @@ def _wait_for_xlsx(**kwargs):
     path_ = Path("./tmp")
     data_files = path_.glob("*.xlsx")
     files = [str(i) for i in data_files]
-    LoggingMixin().log.info(f'Find files {files}')
+    LoggingMixin().log.debug(f'Find files {files}')
     if len(files) == 5:
         ti.xcom_push(key='files', value=files)
     else:
@@ -364,7 +364,7 @@ args = {
 }
 
 
-with DAG('etl_data', description='extract transform load data parsed from files', schedule_interval='*/1 1 * * *',
+with DAG('etl_data', description='extract transform load data parsed from files', schedule_interval='*/1 1 1 * *',
          catchup=False, default_args=args) as dag:  # 0 * * * *   */1 * * * *
 
     sensor_data = PythonSensor(
