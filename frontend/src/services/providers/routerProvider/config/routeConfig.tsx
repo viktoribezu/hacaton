@@ -1,6 +1,7 @@
 import { AppRoutes, RoutePath } from "@/utils/consts/router";
 import { AppRoutesProps } from "@/types/router";
-import { ManagementPage, NotFoundPage } from "@/pages";
+import { ManagementPage } from "@/pages";
+import { Navigate } from "react-router-dom";
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MANAGEMENT]: {
@@ -16,7 +17,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     // last
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,
-        element: <NotFoundPage />,
+        element: <Navigate to={RoutePath.management}/>,
         authOnly: true
     }
 };

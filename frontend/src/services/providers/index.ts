@@ -12,4 +12,8 @@ export {
     routeConfig
 } from "./routerProvider/config/routeConfig";
 
+export {
+    PersistGateProvider
+} from "./PersistGate/PersistGate";
+
 export { AppRouter };
