@@ -15,7 +15,7 @@ services:
     env_file:
       - envs/database.env
     restart:
-      on-failure
+      always
     networks:
       - pgdb
 
@@ -29,7 +29,7 @@ services:
     env_file:
       - envs/database.env
     restart:
-      on-failure
+      always
     networks:
       - pgdb
       - front_back
@@ -41,7 +41,7 @@ services:
     env_file:
       - envs/database.env
     restart:
-      on-failure
+      always
     networks:
       - pgdb
 
@@ -52,7 +52,7 @@ services:
     depends_on:
       - backend
     restart:
-      on-failure
+      always
     networks:
       - front_back
 
