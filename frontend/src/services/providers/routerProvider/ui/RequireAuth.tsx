@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getUserInited } from "@/store/user/userSelectors";
+import { getUserToken } from "@/store/token/tokenSelectors";
 
 export const RequireAuth = ({ children }: {children: JSX.Element}) => {
-    const isAuth = useSelector(getUserInited);
+    const isAuth = useSelector(getUserToken);
 
     if (!isAuth) {
         return <Navigate to={"/login"} replace />;

@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserSchema } from "./UserSchema";
+import { loginByUsername, returnedLogin } from "@/services/api/User/loginByUsername";
 
 const initialState: UserSchema = {
+    isLoading: false,
     _inited: false,
 };
 
@@ -17,8 +19,24 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.authData = undefined;
-            // TODO: remove user data
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loginByUsername.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(loginByUsername.fulfilled, (state, action: PayloadAction<returnedLogin>) => {
+                state.isLoading = false;
+                state.authData = {
+                    email: action.payload.email
+                };
+            })
+            .addCase(loginByUsername.rejected, (state) => {
+                state.isLoading = false;
+                state.error = "Неверные данные для входа";
+            });
     },
 });
 

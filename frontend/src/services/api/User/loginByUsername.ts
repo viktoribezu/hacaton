@@ -1,24 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkConfig } from "@/store/StateSchema";
-import { User } from "@/store/user/UserSchema";
+import { tokenActions } from "@/store/token/tokenSlice";
 
 interface loginByUsernameProps {
-    username: string;
+    email: string;
     password: string;
 }
 
+export interface returnedLogin {
+    email: string;
+}
+
 export const loginByUsername = createAsyncThunk<
-    User,
+    returnedLogin,
     loginByUsernameProps,
     ThunkConfig<string>
     >(
-        "management/fetchManagementObjects",
-        async ({ username, password }, thunkAPI) => {
-            const { extra, rejectWithValue } = thunkAPI;
+        "user/loginByUsername",
+        async ({ email, password }, thunkAPI) => {
+            const { extra, rejectWithValue, dispatch } = thunkAPI;
 
             try {
-                const response = await extra.api.post<User>("/login/", {
-                    username,
+                const response = await extra.api.post<{token: string}>("/accounts/login/", {
+                    email,
                     password
                 });
 
@@ -26,7 +30,10 @@ export const loginByUsername = createAsyncThunk<
                     throw new Error();
                 }
 
-                return response.data;
+                dispatch(tokenActions.setToken(response.data.token));
+                return {
+                    email
+                };
             } catch (e) {
                 return rejectWithValue("error");
             }
