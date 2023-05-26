@@ -105,6 +105,8 @@ services:
       - backend
     restart:
       on-failure
+    env_file:
+      - envs/frontend.env
     networks:
       - front_back
 
