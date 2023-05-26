@@ -72,7 +72,8 @@ const initialState: ManagementSchema = {
         district: "",
         finishFixDate: "",
         startFixDate: ""
-    }
+    },
+    _inited: false,
 };
 
 export const managementSlice = createSlice({
@@ -100,6 +101,7 @@ export const managementSlice = createSlice({
             .addCase(fetchManagementObjects.pending, (state) => {
                 state.isLoading = true;
                 state.error = undefined;
+                state._inited = true;
             })
             .addCase(fetchManagementObjects.fulfilled, (state, action) => {
                 state.isLoading = false;

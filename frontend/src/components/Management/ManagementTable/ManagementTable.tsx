@@ -1,9 +1,9 @@
-import { Modal, Table } from "antd";
-import { useAppDispatch } from "@/utils/hooks";
-import { getObjectSourceData, managementAction, ManagementObject } from "@/store/management";
-import { useSelector } from "react-redux";
-import { ManagementEditResultModal } from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
-import { useState } from "react";
+import {Modal, Table} from "antd";
+import {useAppDispatch} from "@/utils/hooks";
+import {getObjectSourceData, managementAction, ManagementObject} from "@/store/management";
+import {useSelector} from "react-redux";
+import {ManagementEditResultModal} from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
+import {useState} from "react";
 
 const columns = [
     {
@@ -49,7 +49,6 @@ export const ManagementTable = () => {
         setSelectedEditableObject(record);
         setEditResultModalVisible(true);
     };
-
 
     return (
         <>

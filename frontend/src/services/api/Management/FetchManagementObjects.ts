@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ManagementObject } from "@/store/management";
 import { ThunkConfig } from "@/store/StateSchema";
 import { ManagementFilterParams } from "@/store/management/ManagementSchema";
+import {djangoResponseType} from "@/types/djangoResponseType";
 
 export const fetchManagementObjects = createAsyncThunk<
     ManagementObject[],
@@ -13,7 +14,7 @@ export const fetchManagementObjects = createAsyncThunk<
             const { extra, rejectWithValue } = thunkAPI;
 
             try {
-                const response = await extra.api.get<ManagementObject[]>("/task_in_work/", {
+                const response = await extra.api.get<djangoResponseType<ManagementObject>>("/task_in_work/", {
                     params: {
                         object__adm_area: managementFilterParams.objectCategory,
                         object__district: managementFilterParams.district,
@@ -26,7 +27,7 @@ export const fetchManagementObjects = createAsyncThunk<
                     throw new Error();
                 }
 
-                return response.data;
+                return response.data.results;
             } catch (e) {
                 return rejectWithValue("error");
             }
