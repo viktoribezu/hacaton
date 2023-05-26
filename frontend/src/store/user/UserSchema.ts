@@ -5,6 +5,7 @@ export interface User {
 export interface UserSchema {
     isLoading: boolean;
     error?: string;
+    resetPasswordStatus?: string;
     authData?: User;
     // Флаг, который будет зависеть от инициализации данных пользователя
     _inited: boolean;

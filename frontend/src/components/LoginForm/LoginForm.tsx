@@ -1,12 +1,12 @@
 import cls from "./LoginForm.module.scss";
-import { useCallback } from "react";
-import { Button, Form, Input, Typography } from "antd";
-import { HStack } from "@/components/ui/Stack/HStack/HStack";
-import { useAppDispatch } from "@/utils/hooks";
-import { Link } from "react-router-dom";
-import { loginByUsername } from "@/services/api/User/loginByUsername";
-import { useSelector } from "react-redux";
-import { getUserError, getUserIsLoading } from "@/store/user/userSelectors";
+import {useCallback} from "react";
+import {Button, Form, Input, Typography} from "antd";
+import {HStack} from "@/components/ui/Stack/HStack/HStack";
+import {useAppDispatch} from "@/utils/hooks";
+import {Link} from "react-router-dom";
+import {loginByUsername} from "@/services/api/User/loginByUsername";
+import {useSelector} from "react-redux";
+import {getUserError, getUserIsLoading} from "@/store/user/userSelectors";
 
 const { Text } = Typography;
 
@@ -14,7 +14,6 @@ export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const isLoading = useSelector(getUserIsLoading);
     const error = useSelector(getUserError);
-    
     const onFinishHandler = useCallback(({ email, password }: {email: string, password: string}) => {
         dispatch(loginByUsername({ email, password }));
     }, [dispatch]);
@@ -48,7 +47,10 @@ export const LoginForm = () => {
                         </HStack>
                     }
                     name="password"
-                    rules={[{ required: true, message: "Введите Ваш пароль!" }]}
+                    rules={[
+                        { required: true, message: "Введите Ваш пароль!" },
+                        { min: 6, message: 'Минимальная длина пароль 6 символов'}
+                    ]}
                 >
                     <Input.Password placeholder={"Введите пароль"} />
                 </Form.Item>

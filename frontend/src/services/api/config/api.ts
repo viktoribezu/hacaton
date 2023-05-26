@@ -1,4 +1,5 @@
 import axios from "axios";
+import {store} from "@/store/store";
 
 // Настраиваем конфиг для axios
 export const $api = axios.create({
@@ -6,7 +7,9 @@ export const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    // const token = localStorage.getItem("USER_LOCALSTORAGE_KEY") || "token"; localStorage.getItem(USER_LOCALSTORAGE_KEY);
-
+    const token = store.getState()?.token?.token
+    if (token) {
+        config.headers["Authorization"] = `Token ${token}`
+    }
     return config;
 });
