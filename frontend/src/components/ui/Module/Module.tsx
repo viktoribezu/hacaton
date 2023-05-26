@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
 import cls from "./Module.module.scss";
+import {classNames} from "@/utils/lib";
 
 interface ModuleProps {
-    children: ReactNode
+    children: ReactNode;
+    className?: string;
 }
 
 export const Module = (props: ModuleProps) => {
-    const { children } = props;
+    const { children, className } = props;
 
     return (
-        <div className={cls.moduleWrapper}>
+        <div className={classNames(cls.moduleWrapper, {}, [className])}>
             {children}
         </div>
     );

@@ -4,6 +4,7 @@ export const getSelectedRows = (state: StateSchema) => state.management.selected
 export const getSelectedRowsKeys = (state: StateSchema) => state.management.selectedRowsKeys;
 export const getObjectSourceData = (state: StateSchema) => state.management.objectSource;
 export const getObjectIsLoading = (state:StateSchema) => state.management.isLoading;
+export const getObjectInited = (state:StateSchema) => state.management._inited;
 
 // Filter group selectors
 export const getManagementFilterObjectCategory = (state: StateSchema) => state.management.filterGroup.objectCategory;
