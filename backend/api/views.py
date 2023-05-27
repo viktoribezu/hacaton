@@ -15,14 +15,6 @@ class TaskInWorkListView(generics.ListAPIView):
         'plan_date_end': ["in", "exact"],
         'fact_date_start': ["in", "exact"],
         'fact_date_end': ["in", "exact"],
-        'object__adm_area': ["in", "exact"],
-        'object__district': ["in", "exact"],
-        'object__street': ["in", "exact"],
-        'object__house': ["in", "exact"],
-        'object__corpus': ["in", "exact"],
-        'object__composition': ["in", "exact"],
-        'object__structure': ["in", "exact"],
-        'object__col_770__local_id': ["in", "exact"],
         'unom': ["in", "exact"]
     }
 
@@ -40,14 +32,14 @@ class ObjectListView(generics.ListAPIView):
     queryset = Object.objects.all()
     serializer_class = ObjectSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = [
-        'adm_area',
-        'district',
-        'street',
-        'house',
-        'corpus',
-        'composition',
-        'structure',
-        'col_770__local_id',
-        'col_782',
-    ]
+    filterset_fields = {
+        'adm_area': ["in", "exact"],
+        'district': ["in", "exact"],
+        'street': ["in", "exact"],
+        'house': ["in", "exact"],
+        'corpus': ["in", "exact"],
+        'composition': ["in", "exact"],
+        'structure': ["in", "exact"],
+        'col_770__local_id': ["in", "exact"],
+        'col_782': ["in", "exact"],
+    }
