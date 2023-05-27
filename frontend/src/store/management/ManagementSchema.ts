@@ -26,4 +26,5 @@ export interface ManagementSchema {
     objectSource: ManagementObject[];
     filterGroup: ManagementFilterParams;
     error?: string;
+    _inited: boolean;
 }
