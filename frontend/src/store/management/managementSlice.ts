@@ -1,64 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ManagementFilterParams, ManagementSchema } from "./ManagementSchema";
 import { fetchManagementObjects } from "@/services/api/Management/FetchManagementObjects";
-
-const mockedObjectsSource = [
-    {
-        key: 1,
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-        district: "Московский"
-    },
-    {
-        key: 2,
-        name: "John",
-        age: 42,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-        district: "Московский"
-    },
-    {
-        key: 3,
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-        district: "Московский"
-    },
-    {
-        key: 4,
-        name: "John",
-        age: 42,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-        district: "Московский"
-    },
-    {
-        key: 5,
-        name: "Mike",
-        age: 32,
-        address: "10 Downing Street",
-        cadastralNumber: "2",
-        objectType: "Жилой дом",
-        exploitationYear: "2023",
-        condition: "Хорошее",
-        district: "Московский"
-    },
-];
+import { mockedObject } from "@/utils/consts/mockedData";
 
 const initialState: ManagementSchema = {
     isLoading: false,
@@ -103,16 +46,17 @@ export const managementSlice = createSlice({
                 state.error = undefined;
                 state._inited = true;
             })
-            .addCase(fetchManagementObjects.fulfilled, (state, action) => {
+            .addCase(fetchManagementObjects.fulfilled, (state) => {
                 state.isLoading = false;
-                state.objectSource = action.payload;
+                // state.objectSource = action.payload;
+                state.objectSource = mockedObject;
             })
             .addCase(fetchManagementObjects.rejected, (state, action: PayloadAction<string | undefined>) => {
                 state.isLoading = false;
                 state.error = action.payload;
 
                 // TODO: Убрать моковые данные
-                state.objectSource = mockedObjectsSource;
+                state.objectSource = mockedObject;
             });
     },
 });

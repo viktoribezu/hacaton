@@ -24,12 +24,12 @@ const options: CascaderOption[] = [
 
 const columns = [
     {
-        title: "Причина ремонат",
+        title: "Вид работ",
         dataIndex: "problemType",
         key: "problemType",
     },
     {
-        title: "Предполагаемая дата отказа",
+        title: "Предполагаемая дата ремонта",
         dataIndex: "breaking_date",
         key: "breaking_date",
         render: (value: string) => <DatePicker defaultValue={dayjs(value, DateFormat)}/>
@@ -139,6 +139,8 @@ const selectedObjectMock = [
 
 export const ManagementEditResultModal = (props: ManagementEditResultModalProps) => {
     const { selectedObject } = props;
+
+
 
     return (
         <>

@@ -1,9 +1,9 @@
-import {Modal, Table} from "antd";
-import {useAppDispatch} from "@/utils/hooks";
-import {getObjectSourceData, managementAction, ManagementObject} from "@/store/management";
-import {useSelector} from "react-redux";
-import {ManagementEditResultModal} from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
-import {useState} from "react";
+import { Modal, Table } from "antd";
+import { useAppDispatch } from "@/utils/hooks";
+import { getObjectSourceData, managementAction, ManagementObject } from "@/store/management";
+import { useSelector } from "react-redux";
+import { ManagementEditResultModal } from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
+import { useState } from "react";
 
 const columns = [
     {
@@ -12,24 +12,29 @@ const columns = [
         key: "cadastralNumber",
     },
     {
-        title: "тип объекта",
-        dataIndex: "objectType",
-        key: "objectType",
+        title: "Категория объекта",
+        dataIndex: "col_103506",
+        key: "col_103506",
     },
     {
-        title: "год ввода в эксплуатацию",
-        dataIndex: "exploitationYear",
-        key: "exploitationYear",
+        title: "Округ",
+        dataIndex: "adm_area",
+        key: "adm_area",
     },
     {
-        title: "состояние",
-        dataIndex: "condition",
-        key: "condition",
+        title: "Район",
+        dataIndex: "district",
+        key: "district",
     },
     {
-        title: "адрес",
-        dataIndex: "address",
-        key: "address",
+        title: "Улица",
+        dataIndex: "street",
+        key: "street",
+    },
+    {
+        title: "Дом",
+        dataIndex: "house",
+        key: "house"
     }
 ];
 

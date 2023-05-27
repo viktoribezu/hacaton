@@ -8,7 +8,11 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        district: "Московский"
+        district: "Московский",
+        objectCategory: "objectCategory",
+        adm_area: "adm_ares",
+        street: "street",
+        house: "house",
     },
     {
         key: 2,
@@ -19,7 +23,11 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        district: "Московский"
+        district: "Московский",
+        objectCategory: "objectCategory",
+        adm_area: "adm_ares",
+        street: "street",
+        house: "house",
     },
     {
         key: 3,
@@ -30,7 +38,11 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        district: "Московский"
+        district: "Московский",
+        objectCategory: "objectCategory",
+        adm_area: "adm_ares",
+        street: "street",
+        house: "house",
     },
     {
         key: 4,
@@ -41,7 +53,11 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        district: "Московский"
+        district: "Московский",
+        objectCategory: "objectCategory",
+        adm_area: "adm_ares",
+        street: "street",
+        house: "house",
     },
     {
         key: 5,
@@ -52,6 +68,10 @@ export const mockedObject = [
         objectType: "Жилой дом",
         exploitationYear: "2023",
         condition: "Хорошее",
-        district: "Московский"
+        district: "Московский",
+        objectCategory: "objectCategory",
+        adm_area: "adm_ares",
+        street: "street",
+        house: "house",
     },
 ];
