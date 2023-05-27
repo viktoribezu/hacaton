@@ -9,14 +9,22 @@ class TaskInWorkListView(generics.ListAPIView):
     queryset = TaskInWork.objects.all()
     serializer_class = TaskInWorkSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = [
-        'type_of_work__local_id',
-        'plan_date_start',
-        'plan_date_end',
-        'fact_date_start',
-        'fact_date_end',
-        'unom'
-    ]
+    filterset_fields = {
+        'type_of_work__local_id': ["in", "exact"],
+        'plan_date_start': ["in", "exact"],
+        'plan_date_end': ["in", "exact"],
+        'fact_date_start': ["in", "exact"],
+        'fact_date_end': ["in", "exact"],
+        'object__adm_area': ["in", "exact"],
+        'object__district': ["in", "exact"],
+        'object__street': ["in", "exact"],
+        'object__house': ["in", "exact"],
+        'object__corpus': ["in", "exact"],
+        'object__composition': ["in", "exact"],
+        'object__structure': ["in", "exact"],
+        'object__col_770__local_id': ["in", "exact"],
+        'unom': ["in", "exact"]
+    }
 
 
 class ProblemListView(generics.ListAPIView):
