@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ManagementObject } from "@/store/management";
 import { ThunkConfig } from "@/store/StateSchema";
 import { ManagementFilterParams } from "@/store/management/ManagementSchema";
-import {djangoResponseType} from "@/types/djangoResponseType";
+import { djangoResponseType } from "@/types/djangoResponseType";
 
 export const fetchManagementObjects = createAsyncThunk<
     ManagementObject[],
@@ -14,12 +14,14 @@ export const fetchManagementObjects = createAsyncThunk<
             const { extra, rejectWithValue } = thunkAPI;
 
             try {
-                const response = await extra.api.get<djangoResponseType<ManagementObject>>("/task_in_work/", {
+                const response = await extra.api.get<djangoResponseType<ManagementObject>>("/object/", {
                     params: {
-                        object__adm_area: managementFilterParams.objectCategory,
-                        object__district: managementFilterParams.district,
-                        fact_date_start: managementFilterParams.startFixDate,
-                        fact_date_end: managementFilterParams.finishFixDate
+                        adm_area__icontains: managementFilterParams.objectArea,
+                        district__icontains: managementFilterParams.district,
+                        fact_date_start__icontains: managementFilterParams.startFixDate,
+                        fact_date_end__icontains: managementFilterParams.finishFixDate,
+                        house__icontains: managementFilterParams.house,
+                        street: managementFilterParams.street
                     }
                 });
 

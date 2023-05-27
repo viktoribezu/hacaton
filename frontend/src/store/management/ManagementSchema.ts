@@ -8,6 +8,12 @@ export interface ManagementObject {
     exploitationYear: string;
     condition: string;
     district: string;
+    objectCategory: string;
+    adm_area: string;
+    street: string;
+    house: string;
+
+
 }
 
 export interface ManagementFilterParams {
@@ -17,6 +23,8 @@ export interface ManagementFilterParams {
     startFixDate?: string;
     finishFixDate?: string;
     district?: string;
+    street?: string;
+    house?: string;
 }
 
 export interface ManagementSchema {

@@ -9,3 +9,7 @@ export {
 export {
     Module
 } from "./Module/Module";
+
+export {
+    SearchSelectInput
+} from "./SearchSelectInput/SearchSelectInput";
