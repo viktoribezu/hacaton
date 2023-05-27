@@ -41,5 +41,5 @@ class ObjectListView(generics.ListAPIView):
         'composition',
         'structure',
         'col_770__local_id',
-        'unom',
+        'col_782',
     ]
