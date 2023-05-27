@@ -7,6 +7,9 @@ export function buildDevServer({ PORT }: BuildOptions): DevServerConfiguration {
         port: PORT,
         open: true,
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        allowedHosts: [
+            'vividnexus.ru'
+        ]
     };
 }
