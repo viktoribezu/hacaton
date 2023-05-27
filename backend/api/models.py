@@ -165,7 +165,7 @@ class Problem(BaseModel):
 
 
 class Predict(models.Model):
-    object = models.ForeignKey(Object, on_delete=models.CASCADE)
+    object = models.ForeignKey(Object, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     planing_date = models.DateTimeField()
 
