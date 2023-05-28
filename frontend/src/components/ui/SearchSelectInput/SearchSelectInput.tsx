@@ -16,7 +16,7 @@ const fetch = (value: string, callback: any, field: string, token: string | unde
     currentValue = value;
 
     const request = () => {
-        axios.get(`/object/?${field}__icontains=${value}`, {
+        axios.get(`/object/?object__${field}__icontains=${value}`, {
             baseURL: __API__,
             headers: {
                 Authorization: `Token ${token}`
