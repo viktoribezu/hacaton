@@ -9,12 +9,12 @@ const initialState: ManagementSchema = {
     selectedRowsKeys: [],
     objectSource: [],
     filterGroup: {
-        objectCategory: "",
-        objectArea: "",
-        sourceData: "",
-        district: "",
-        finishFixDate: "",
-        startFixDate: ""
+        objectCategory: [],
+        objectArea: [],
+        sourceData: [],
+        district: [],
+        finishFixDate: [],
+        startFixDate: []
     },
     _inited: false,
 };
@@ -32,11 +32,10 @@ export const managementSlice = createSlice({
             state.selectedRowsKeys = [];
             state.selectedRows = [];
         },
-        updateFilterGroupField: (state, action: PayloadAction<ManagementFilterParams>) => {
-            state.filterGroup = {
-                ...state.filterGroup,
-                ...action.payload
-            };
+        updateFilterGroupField: (state, action) => {
+            const field = action.payload.field as keyof ManagementFilterParams;
+            state.filterGroup[field] = [];
+            state.filterGroup[field]?.push(action.payload.value);
         }
     },
     extraReducers: (builder) => {
@@ -46,10 +45,9 @@ export const managementSlice = createSlice({
                 state.error = undefined;
                 state._inited = true;
             })
-            .addCase(fetchManagementObjects.fulfilled, (state) => {
+            .addCase(fetchManagementObjects.fulfilled, (state, action) => {
                 state.isLoading = false;
-                // state.objectSource = action.payload;
-                state.objectSource = mockedObject;
+                state.objectSource = action.payload;
             })
             .addCase(fetchManagementObjects.rejected, (state, action: PayloadAction<string | undefined>) => {
                 state.isLoading = false;

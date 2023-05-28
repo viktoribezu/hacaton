@@ -1,37 +1,67 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import type { SelectProps } from "antd";
 import { Select } from "antd";
+import axios, { AxiosResponse } from "axios";
+import { useSelector } from "react-redux";
+import { getUserToken } from "@/store/token/tokenSelectors";
 
 let timeout: ReturnType<typeof setTimeout> | null;
 let currentValue: string;
 
-const fetch = (value: string, callback: any) => {
+const fetch = (value: string, callback: any, field: string, token: string | undefined) => {
     if (timeout) {
         clearTimeout(timeout);
         timeout = null;
     }
     currentValue = value;
 
+    const request = () => {
+        axios.get(`/object/?${field}__icontains=${value}`, {
+            baseURL: __API__,
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+            .then((res: AxiosResponse) => {
+                if (currentValue === value) {
+                    const data = res.data.results.map((item: any) => ({
+                        value: item[field][0],
+                        text: item[field][0],
+                    }));
+                    callback([data]);
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     if (value) {
-        // timeout = setTimeout(fake, 300);
+        timeout = setTimeout(request, 300);
     } else {
         callback([]);
     }
 };
 
-export const SearchSelectInput: React.FC<{ placeholder: string; style?: React.CSSProperties }> = (props) => {
-    const [data, setData] = useState<SelectProps["options"]>([
-        { value: "Kolomyaka", label: "Kolomyaka" },
-        { value: "Nikita", label: "Nikita" },
-    ]);
+interface SearchSelectInputProps {
+    placeholder: string;
+    style?: CSSProperties;
+    field: string;
+    onChangeField: (values: string, field: string) => void
+}
+
+export const SearchSelectInput = (props: SearchSelectInputProps) => {
+    const token = useSelector(getUserToken);
+    const [data, setData] = useState<SelectProps["options"]>();
     const [value, setValue] = useState<string>();
 
     const handleSearch = (newValue: string) => {
-        fetch(newValue, setData);
+        fetch(newValue, setData, props.field, token);
     };
 
     const handleChange = (newValue: string) => {
         setValue(newValue);
+        props.onChangeField(newValue, props.field);
     };
 
     return (
@@ -40,7 +70,7 @@ export const SearchSelectInput: React.FC<{ placeholder: string; style?: React.CS
             showSearch
             value={value}
             placeholder={props.placeholder}
-            style={props.style}
+            style={{ width: 200 }}
             defaultActiveFirstOption={false}
             showArrow={false}
             filterOption={false}

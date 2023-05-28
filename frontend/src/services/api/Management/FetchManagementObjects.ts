@@ -16,12 +16,12 @@ export const fetchManagementObjects = createAsyncThunk<
             try {
                 const response = await extra.api.get<djangoResponseType<ManagementObject>>("/object/", {
                     params: {
-                        adm_area__icontains: managementFilterParams.objectArea,
-                        district__icontains: managementFilterParams.district,
-                        fact_date_start__icontains: managementFilterParams.startFixDate,
-                        fact_date_end__icontains: managementFilterParams.finishFixDate,
-                        house__icontains: managementFilterParams.house,
-                        street: managementFilterParams.street
+                        adm_area__inn: managementFilterParams.objectArea?.join(","),
+                        district__inn: managementFilterParams.district?.join(","),
+                        fact_date_start__inn: managementFilterParams.startFixDate?.join(","),
+                        fact_date_end__inn: managementFilterParams.finishFixDate?.join(","),
+                        house__inn: managementFilterParams.house?.join(","),
+                        street__inn: managementFilterParams.street?.join(",")
                     }
                 });
 

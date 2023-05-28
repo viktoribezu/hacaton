@@ -17,14 +17,14 @@ export interface ManagementObject {
 }
 
 export interface ManagementFilterParams {
-    objectCategory?: string;
-    sourceData?: string;
-    objectArea?: string;
-    startFixDate?: string;
-    finishFixDate?: string;
-    district?: string;
-    street?: string;
-    house?: string;
+    objectCategory?: string[];
+    sourceData?: string[];
+    objectArea?: string[];
+    startFixDate?: string[];
+    finishFixDate?: string[];
+    district?: string[];
+    street?: string[];
+    house?: string[];
 }
 
 export interface ManagementSchema {
