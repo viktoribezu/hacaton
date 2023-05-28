@@ -7,9 +7,9 @@ import { useState } from "react";
 
 const columns = [
     {
-        title: "кадастровый номер",
-        dataIndex: "cadastralNumber",
-        key: "cadastralNumber",
+        title: "UNOM",
+        dataIndex: "col_782",
+        key: "col_782",
     },
     {
         title: "Категория объекта",
