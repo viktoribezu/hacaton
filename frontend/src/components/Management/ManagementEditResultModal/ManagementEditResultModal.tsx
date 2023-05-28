@@ -154,7 +154,11 @@ export const ManagementEditResultModal = (props: ManagementEditResultModalProps)
                             <Descriptions.Item label="Округ">-</Descriptions.Item>
                             <Descriptions.Item label="Район">{selectedObject?.district}</Descriptions.Item>
                             <Descriptions.Item label="Улица">5</Descriptions.Item>
+                            <Descriptions.Item label="Дом">5</Descriptions.Item>
                             <Descriptions.Item label="Год постройки">2003</Descriptions.Item>
+                            <Descriptions.Item label="Год реконструкции">2003</Descriptions.Item>
+                            <Descriptions.Item label="Кол-во этажей">18</Descriptions.Item>
+                            <Descriptions.Item label="Аварийность">-</Descriptions.Item>
                             <Descriptions.Item label="UNOM">4359802</Descriptions.Item>
                         </Descriptions>
                     </Card>
