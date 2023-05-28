@@ -164,15 +164,6 @@ class Problem(BaseModel):
         return f"{self.problem_type.name} {self.object.name}"
 
 
-class Predict(models.Model):
-    object = models.ForeignKey(Object, on_delete=models.CASCADE, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    planing_date = models.DateTimeField()
-
-    def __str__(self):
-        return f"{self.object.name} {self.planing_date}"
-
-
 class TypeOfWork(BaseModel):
 
     class TypeOfWork(models.TextChoices):
@@ -213,3 +204,21 @@ class TaskInWork(BaseModel):
 
     def __str__(self):
         return
+
+
+class Predict(models.Model):
+    object = models.ForeignKey(Object, on_delete=models.CASCADE, null=True)
+    type_of_work = models.ManyToManyField(TypeOfWork,
+                                          through='TypeOfWorkPredict',
+                                          through_fields=( 'predict', 'type_of_work'))
+    created_at = models.DateTimeField(auto_now_add=True)
+    planing_date = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.object.name} {self.planing_date}"
+
+
+class TypeOfWorkPredict(models.Model):
+    type_of_work = models.ForeignKey(TypeOfWork, on_delete=models.CASCADE, to_field='local_id')
+    predict = models.ForeignKey(Predict, on_delete=models.CASCADE, null=True)
+

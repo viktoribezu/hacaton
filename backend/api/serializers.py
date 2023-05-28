@@ -79,9 +79,15 @@ class ProjectSeriesSerializer(serializers.ModelSerializer):
 
 
 class ObjectSerializer(serializers.ModelSerializer):
+    last_predict = serializers.SerializerMethodField()
+
     class Meta:
         model = Object
         fields = '__all__'
+
+    def get_last_predict(self, obj):
+        selected_predict = Predict.objects.filter(object=obj).latest('created_at')
+        return TypeOfWorkSerializer(selected_predict.type_of_work, many=True).data
 
 
 class ProblemTypeSerializer(serializers.ModelSerializer):
