@@ -69,8 +69,8 @@ const columns = [
 const problemsColumns = [
     {
         title: "Дата когда обращение пришло",
-        dataIndex: "taskDate",
-        key: "taskDate"
+        dataIndex: "plan_date_start",
+        key: "plan_date_start"
     },
     {
         title: "От какого сервиса пришло",
@@ -139,7 +139,6 @@ const selectedObjectMock = [
 
 export const ManagementEditResultModal = (props: ManagementEditResultModalProps) => {
     const { selectedObject } = props;
-
 
 
     return (
