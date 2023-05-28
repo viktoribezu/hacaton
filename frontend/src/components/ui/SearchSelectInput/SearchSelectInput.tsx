@@ -70,7 +70,7 @@ export const SearchSelectInput = (props: SearchSelectInputProps) => {
             showSearch
             value={value}
             placeholder={props.placeholder}
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             defaultActiveFirstOption={false}
             showArrow={false}
             filterOption={false}
