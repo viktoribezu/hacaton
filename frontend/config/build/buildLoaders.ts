@@ -5,10 +5,9 @@ import { buildBabelLoader } from "./loaders/buildBabelLoader";
 export function buildLoaders(options: BuildOptions) {
 
     const fileLoader = {
-        test: /(webp|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
-            "file-loader",
-            "webp-loader"
+            "file-loader"
         ]
     };
 

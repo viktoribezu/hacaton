@@ -1,5 +1,5 @@
 import { HStack, Module, SearchSelectInput } from "@/components/ui";
-import { Button, Checkbox, DatePicker, Modal, Space } from "antd";
+import { Button, DatePicker, Modal, Space } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
@@ -73,7 +73,7 @@ export const ManagementFilterGroup = () => {
         <>
             <Module>
                 <Space size={"middle"} style={{ width: "100%" }} direction={"vertical"}>
-                    <Space size={"large"}>
+                    <Space size={"large"} wrap>
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"col_103506"}
@@ -81,8 +81,23 @@ export const ManagementFilterGroup = () => {
                         />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
+                            field={"col_103506"}
+                            placeholder={"Источник данных"}
+                        />
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
                             field={"adm_area"}
                             placeholder={"Округ"}
+                        />
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"district"}
+                            placeholder={"Район"}
+                        />
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"street"}
+                            placeholder={"Улица"}
                         />
                         <Button
                             loading={managementObjectsIsLoading}
@@ -92,7 +107,12 @@ export const ManagementFilterGroup = () => {
                             <span>Запустить</span>
                         </Button>
                     </Space>
-                    <Space size={"large"}>
+                    <Space size={"large"} wrap>
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"col_782"}
+                            placeholder={"UNOM"}
+                        />
                         <DatePicker
                             name={"startFixDate"}
                             onChange={onChangeDateFieldHandler("startFixDate")}
@@ -102,18 +122,12 @@ export const ManagementFilterGroup = () => {
                             placeholder={"Дата по"} />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
-                            field={"district"}
-                            placeholder={"Район"}
+                            field={"house"}
+                            placeholder={"Дом"}
                         />
                         <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </Space>
                     <HStack max justify={"between"}>
-                        <Space size={"large"}>
-                            <Checkbox>Все</Checkbox>
-                            <Checkbox>В статусе ожидания</Checkbox>
-                            <Checkbox>Запланированные</Checkbox>
-                            <Checkbox>Сделанные</Checkbox>
-                        </Space>
                         <Button
                             icon={<DownloadOutlined />}
                             onClick={() => exportData<ManagementObject>("/objects")}

@@ -2,6 +2,7 @@ import { AppRoutes, RoutePath } from "@/utils/consts/router";
 import { AppRoutesProps } from "@/types/router";
 import { ManagementPage } from "@/pages";
 import { Navigate } from "react-router-dom";
+import { PlanningPage } from "@/pages/PlanningPage/PlanningPage";
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MANAGEMENT]: {
@@ -11,7 +12,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.PLANNING]: {
         path: RoutePath.planning,
-        element: <div>Planing page</div>,
+        element: <PlanningPage />,
         authOnly: true,
     },
     // last
