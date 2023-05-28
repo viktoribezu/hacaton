@@ -1,6 +1,6 @@
-import { HStack, Module } from "@/components/ui";
-import { Button, Checkbox, DatePicker, Input, Modal, Space } from "antd";
-import { DownloadOutlined, SearchOutlined } from "@ant-design/icons";
+import { HStack, Module, SearchSelectInput } from "@/components/ui";
+import { Button, Checkbox, DatePicker, Modal, Space } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
 import { useAppDispatch } from "@/utils/hooks";
@@ -60,10 +60,9 @@ export const ManagementFilterGroup = () => {
         }));
     }, [dispatch, district, finishFixDate, objectArea, objectCategory, sourceData, startFixDate]);
 
-    const onChangeFilterHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        dispatch(managementAction.updateFilterGroupField({ [name]: value }));
+    const onChangeFilterHandler = useCallback((value: string, field: string) => {
+
+        dispatch(managementAction.updateFilterGroupField({ [field]: value }));
     }, [dispatch]);
 
     const onChangeDateFieldHandler = useCallback((fieldName: string) => (date: Dayjs | null, dateString: string) => {
@@ -75,22 +74,16 @@ export const ManagementFilterGroup = () => {
             <Module>
                 <Space size={"middle"} style={{ width: "100%" }} direction={"vertical"}>
                     <Space size={"large"}>
-                        <Input
-                            value={objectCategory}
-                            name={"objectCategory"}
-                            onChange={onChangeFilterHandler}
-                            placeholder="Категория объекта" suffix={<SearchOutlined />}
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"col_103506"}
+                            placeholder={"Категория объекта"}
                         />
-                        <Input
-                            value={sourceData}
-                            name={"sourceData"}
-                            onChange={onChangeFilterHandler}
-                            placeholder="Источник данных" suffix={<SearchOutlined />} />
-                        <Input
-                            value={objectArea}
-                            name={"objectArea"}
-                            onChange={onChangeFilterHandler}
-                            placeholder="Округ" suffix={<SearchOutlined />} />
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"adm_area"}
+                            placeholder={"Округ"}
+                        />
                         <Button
                             loading={managementObjectsIsLoading}
                             type={"primary"}
@@ -107,11 +100,11 @@ export const ManagementFilterGroup = () => {
                         <DatePicker
                             onChange={onChangeDateFieldHandler("finishFixDate")}
                             placeholder={"Дата по"} />
-                        <Input
-                            name={"district"}
-                            value={district}
-                            onChange={onChangeFilterHandler}
-                            placeholder="Район" suffix={<SearchOutlined />} />
+                        <SearchSelectInput
+                            onChangeField={onChangeFilterHandler}
+                            field={"district"}
+                            placeholder={"Район"}
+                        />
                         <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </Space>
                     <HStack max justify={"between"}>
