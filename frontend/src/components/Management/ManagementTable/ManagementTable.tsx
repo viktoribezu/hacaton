@@ -57,7 +57,20 @@ export const ManagementTable = () => {
     };
 
     const downloadObjectCardHandler = useCallback(() => {
-        exportData<ManagementObject>("/objects", "Карточка для объекта 8625");
+        fetch("/cardFile.xlsx").then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                const alink = document.createElement("a");
+                alink.href = fileURL;
+                alink.download = "Карточка объекта 8625";
+                alink.click();
+            });
+        });
+
+
+        // exportData<ManagementObject>("/objects", "Карточка для объекта 8625");
     }, []);
 
     return (
