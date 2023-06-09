@@ -40,29 +40,9 @@ export const objectRepairTypeMock = [
 export const selectedObjectMock = [
     {
         key: 1,
-        problemType: "Аварийное восстановление гидроизоляции кровли",
-        breaking_date: "2022.01.22",
-        start_fix_date: "2022.01.22",
-        update_datefix_at: "2022.01.22",
-        status_of_work: "Сделано",
+        problemType: "Ремонт крыши",
+        breaking_date: "12.06.2023",
+        update_datefix_at: "12.08.2023",
         executor: "Бригада 1",
-    },
-    {
-        key: 2,
-        problemType: "Восстановление гидроизоляции кровли",
-        breaking_date: "2022.01.14",
-        start_fix_date: "2022.01.14",
-        update_datefix_at: "2022.01.14",
-        status_of_work: "Сделано",
-        executor: "Бригада 1",
-    },
-    {
-        key: 3,
-        problemType: "Очистка кровли",
-        breaking_date: "2022.01.30",
-        start_fix_date: "2022.01.30",
-        update_datefix_at: "2022.01.30",
-        status_of_work: "Сделано",
-        executor: "Бригада 2",
     }
 ];
