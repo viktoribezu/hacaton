@@ -121,7 +121,7 @@ export const ManagementFilterGroup = () => {
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"col_782"}
-                            placeholder={"Тип ремонта"}
+                            placeholder={"Вид работ"}
                             options={objectRepairTypeMock}
                         />
                         <DatePicker

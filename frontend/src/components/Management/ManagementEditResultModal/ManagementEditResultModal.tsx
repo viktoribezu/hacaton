@@ -61,11 +61,11 @@ const problemsColumns = [
         dataIndex: "requestSource",
         key: "requestSource",
     },
-    {
-        title: "Описание причины обращения",
-        dataIndex: "requestDescription",
-        key: "requestDescription"
-    },
+    // {
+    //     title: "Описание причины обращения",
+    //     dataIndex: "requestDescription",
+    //     key: "requestDescription"
+    // },
     {
         title: "Статус",
         dataIndex: "status",

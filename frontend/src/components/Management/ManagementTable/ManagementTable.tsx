@@ -57,7 +57,7 @@ export const ManagementTable = () => {
     };
 
     const downloadObjectCardHandler = useCallback(() => {
-        exportData<ManagementObject>("/objects", "Карточка_объекта");
+        exportData<ManagementObject>("/objects", "Карточка для объекта 8625");
     }, []);
 
     return (
