@@ -13,9 +13,9 @@ export const objectSourceData = [
 ];
 
 export const workSourceMock = [
-    { value: "Бригада 1", label: "Бригада 1" },
-    { value: "Бригада 2", label: "Бригада 2" },
-    { value: "Бригада 3", label: "Бригада 3" }
+    { value: "Исполнитель 1", label: "Исполнитель 1" },
+    { value: "Исполнитель 2", label: "Исполнитель 2" },
+    { value: "Исполнитель 3", label: "Исполнитель 3" }
 ];
 
 export const objectAreaMock = [
@@ -52,6 +52,6 @@ export const selectedObjectMock = [
         problemType: "Ремонт крыши",
         breaking_date: "12.06.2023",
         update_datefix_at: "12.08.2023",
-        executor: "Бригада 1",
+        executor: "Исполнитель 1",
     }
 ];

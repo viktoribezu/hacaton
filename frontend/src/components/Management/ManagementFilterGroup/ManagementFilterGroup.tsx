@@ -128,11 +128,11 @@ export const ManagementFilterGroup = () => {
                             style={{ width: "100%", flex: "1 1 0" }}
                             name={"startFixDate"}
                             onChange={onChangeDateFieldHandler("startFixDate")}
-                            placeholder={"Дата с"} />
+                            placeholder={"План дата с"} />
                         <DatePicker
                             style={{ width: "100%", flex: "1 1 0" }}
                             onChange={onChangeDateFieldHandler("finishFixDate")}
-                            placeholder={"Дата по"} />
+                            placeholder={"План дата по"} />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"house"}
