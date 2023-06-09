@@ -1,9 +1,6 @@
 import React, { CSSProperties, useState } from "react";
-import type { SelectProps } from "antd";
 import { Select } from "antd";
 import axios, { AxiosResponse } from "axios";
-import { useSelector } from "react-redux";
-import { getUserToken } from "@/store/token/tokenSelectors";
 
 let timeout: ReturnType<typeof setTimeout> | null;
 let currentValue: string;
@@ -47,17 +44,18 @@ interface SearchSelectInputProps {
     placeholder: string;
     style?: CSSProperties;
     field: string;
-    onChangeField: (values: string, field: string) => void
+    onChangeField: (values: string, field: string) => void;
+    options?: {value: string, label: string}[];
 }
 
-export const SearchSelectInput = (props: SearchSelectInputProps) => {
-    const token = useSelector(getUserToken);
-    const [data, setData] = useState<SelectProps["options"]>();
-    const [value, setValue] = useState<string>();
 
-    const handleSearch = (newValue: string) => {
-        fetch(newValue, setData, props.field, token);
-    };
+export const SearchSelectInput = (props: SearchSelectInputProps) => {
+    const {
+        options,
+        style = { width: "100%", flex: "1 1 0" }
+    } = props;
+
+    const [value, setValue] = useState<string>();
 
     const handleChange = (newValue: string) => {
         setValue(newValue);
@@ -67,20 +65,19 @@ export const SearchSelectInput = (props: SearchSelectInputProps) => {
     return (
         <Select
             mode={"multiple"}
+            notFoundContent={null}
             showSearch
             value={value}
             placeholder={props.placeholder}
-            style={{ width: 150 }}
+            style={style}
             defaultActiveFirstOption={false}
             showArrow={false}
-            filterOption={false}
-            onSearch={handleSearch}
+            maxTagCount={"responsive"}
             onChange={handleChange}
-            notFoundContent={null}
-            options={(data || []).map((d) => ({
-                value: d.value,
-                label: d.text,
-            }))}
+            filterOption={(input, option) =>
+                (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={options}
         />
     );
 };

@@ -1,20 +1,21 @@
-import { Modal, Table } from "antd";
+import { Button, Modal, Table } from "antd";
 import { useAppDispatch } from "@/utils/hooks";
 import { getObjectSourceData, managementAction, ManagementObject } from "@/store/management";
 import { useSelector } from "react-redux";
-import { ManagementEditResultModal } from "@/components/Management/ManagementEditResultModal/ManagementEditResultModal";
-import { useState } from "react";
+import { ManagementEditResultModal } from "@/components/Management";
+import { useCallback, useState } from "react";
+import { exportData } from "@/utils/lib";
 
 const columns = [
     {
         title: "UNOM",
-        dataIndex: "col_782",
-        key: "col_782",
+        dataIndex: "UNOM",
+        key: "UNOM",
     },
     {
         title: "Категория объекта",
-        dataIndex: "col_103506",
-        key: "col_103506",
+        dataIndex: "objectType",
+        key: "objectType",
     },
     {
         title: "Округ",
@@ -55,6 +56,10 @@ export const ManagementTable = () => {
         setEditResultModalVisible(true);
     };
 
+    const downloadObjectCardHandler = useCallback(() => {
+        exportData<ManagementObject>("/objects", "Карточка_объекта");
+    }, []);
+
     return (
         <>
             <Table
@@ -71,6 +76,11 @@ export const ManagementTable = () => {
                 width={"fit-content"}
                 onCancel={() => setEditResultModalVisible(false)}
                 open={editResultModalVisible}
+                footer={[
+                    <Button onClick={downloadObjectCardHandler} key={"download"}>Скачать карточку</Button>,
+                    <Button onClick={() => setEditResultModalVisible(false)} key={"exit"}>Закрыть</Button>,
+                    <Button onClick={() => setEditResultModalVisible(false)} type={"primary"} key={"save"}>Сохранить</Button>
+                ]}
             >
                 <ManagementEditResultModal
                     selectedObject={selectedEditableObject}

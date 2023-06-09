@@ -19,6 +19,13 @@ import {
 import { exportData } from "@/utils/lib";
 import { fetchManagementObjects } from "@/services/api/Management/FetchManagementObjects";
 import { Dayjs } from "dayjs";
+import {
+    objectAreaMock,
+    objectCategoryMock,
+    objectRepairTypeMock,
+    objectSourceData
+} from "./mockData/objectCategoryMock";
+import { getManagementSourceDataIsHas } from "@/store/management/managementSelectors";
 
 export const ManagementFilterGroup = () => {
     const dispatch = useAppDispatch();
@@ -34,13 +41,13 @@ export const ManagementFilterGroup = () => {
     const finishFixDate = useSelector(getManagementFilterGroupFinishFixDate);
     const objectCategory = useSelector(getManagementFilterObjectCategory);
     const sourceData = useSelector(getManagementFilterGroupSourceData);
+    const isObjectSourceData = useSelector(getManagementSourceDataIsHas);
 
     const deleteClickHandler = useCallback(() => {
         setIsOpenDeleteModal(true);
     }, []);
 
     const onConfirmHandler = useCallback(() => {
-        // TODO: Запрос на удаление объекта
         setConfirmLoading(true);
         setTimeout(() => {
             dispatch(managementAction.deleteObjects());
@@ -73,21 +80,24 @@ export const ManagementFilterGroup = () => {
         <>
             <Module>
                 <Space size={"middle"} style={{ width: "100%" }} direction={"vertical"}>
-                    <Space size={"large"} wrap>
+                    <HStack gap={8}>
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"col_103506"}
                             placeholder={"Категория объекта"}
+                            options={objectCategoryMock}
                         />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"col_103506"}
                             placeholder={"Источник данных"}
+                            options={objectSourceData}
                         />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"adm_area"}
                             placeholder={"Округ"}
+                            options={objectAreaMock}
                         />
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
@@ -106,18 +116,21 @@ export const ManagementFilterGroup = () => {
                         >
                             <span>Запустить</span>
                         </Button>
-                    </Space>
-                    <Space size={"large"} wrap>
+                    </HStack>
+                    <HStack>
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"col_782"}
-                            placeholder={"UNOM"}
+                            placeholder={"Тип ремонта"}
+                            options={objectRepairTypeMock}
                         />
                         <DatePicker
+                            style={{ width: "100%", flex: "1 1 0" }}
                             name={"startFixDate"}
                             onChange={onChangeDateFieldHandler("startFixDate")}
                             placeholder={"Дата с"} />
                         <DatePicker
+                            style={{ width: "100%", flex: "1 1 0" }}
                             onChange={onChangeDateFieldHandler("finishFixDate")}
                             placeholder={"Дата по"} />
                         <SearchSelectInput
@@ -126,10 +139,11 @@ export const ManagementFilterGroup = () => {
                             placeholder={"Дом"}
                         />
                         <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
-                    </Space>
+                    </HStack>
                     <HStack max justify={"between"}>
                         <Button
                             icon={<DownloadOutlined />}
+                            disabled={!isObjectSourceData}
                             onClick={() => exportData<ManagementObject>("/objects")}
                         >
                             Скачать все

@@ -1,18 +1,18 @@
 export interface ManagementObject {
     key: number;
-    name: string;
-    age: number;
-    address: string;
-    cadastralNumber: string;
-    objectType: string;
-    exploitationYear: string;
-    condition: string;
-    district: string;
-    objectCategory: string;
-    adm_area: string;
-    street: string;
-    house: string;
-
+    name?: string;
+    age?: number;
+    address?: string;
+    cadastralNumber?: string;
+    objectType?: string;
+    exploitationYear?: string;
+    condition?: string;
+    district?: string;
+    objectCategory?: string;
+    adm_area?: string;
+    street?: string;
+    house?: string;
+    UNOM?: string;
 
 }
 

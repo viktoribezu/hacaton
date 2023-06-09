@@ -47,7 +47,8 @@ export const managementSlice = createSlice({
             })
             .addCase(fetchManagementObjects.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.objectSource = action.payload;
+
+                state.objectSource = mockedObject;
             })
             .addCase(fetchManagementObjects.rejected, (state, action: PayloadAction<string | undefined>) => {
                 state.isLoading = false;

@@ -1,8 +1,8 @@
 import { mockedObject } from "@/utils/consts/mockedData";
 import { utils, writeFile } from "xlsx";
-import { ManagementObject } from "@/store/management";
 
-export const exportData = <T>(url: string, itemsMocked: T[] | ManagementObject[] = mockedObject) => {
+
+export const exportData = <T>(url: string, fileName  = "DataSheet", itemsMocked = mockedObject ) => {
     // set loading
     // TODO: Добавить запрос для получения данных
 
@@ -10,5 +10,5 @@ export const exportData = <T>(url: string, itemsMocked: T[] | ManagementObject[]
     const workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
-    writeFile(workbook, "DataSheet.xlsx");
+    writeFile(workbook, `${fileName}.xlsx`);
 };
