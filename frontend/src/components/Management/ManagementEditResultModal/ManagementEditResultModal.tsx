@@ -25,21 +25,10 @@ const columns = [
         render: (value: string) => <DatePicker defaultValue={dayjs(value, DateFormat)}/>
     },
     {
-        title: "Дата начала ремонта",
-        dataIndex: "start_fix_date",
-        key: "start_fix_date",
-        render: (value: string) => <DatePicker defaultValue={dayjs(value, DateFormat)}/>
-    },
-    {
         title: "Дата окончания ремонта",
         dataIndex: "update_datefix_at",
         key: "update_datefix_at",
         render: (value: string) => <DatePicker defaultValue={dayjs(value, DateFormat)}/>
-    },
-    {
-        title: "СТАТУС",
-        dataIndex: "status_of_work",
-        key: "status_of_work",
     },
     {
         title: "ИСПОЛНИТЕЛЬ",
@@ -57,6 +46,11 @@ const columns = [
 ];
 
 const problemsColumns = [
+    {
+        title: "Наименование",
+        dataIndex: "requestName",
+        key: "requestName"
+    },
     {
         title: "Дата когда обращение пришло",
         dataIndex: "requestDate",

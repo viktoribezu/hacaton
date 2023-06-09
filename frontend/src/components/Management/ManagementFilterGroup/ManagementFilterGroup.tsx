@@ -136,7 +136,7 @@ export const ManagementFilterGroup = () => {
                         <SearchSelectInput
                             onChangeField={onChangeFilterHandler}
                             field={"house"}
-                            placeholder={"Дом"}
+                            placeholder={"Адрес"}
                         />
                         <Button onClick={deleteClickHandler} disabled={!selectedRowsKeys.length}>Удалить</Button>
                     </HStack>

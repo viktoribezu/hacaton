@@ -13,9 +13,14 @@ const columns = [
         key: "UNOM",
     },
     {
-        title: "Категория объекта",
-        dataIndex: "objectType",
-        key: "objectType",
+        title: "Вид работ",
+        dataIndex: "typeOfWork",
+        key: "typeOfWork"
+    },
+    {
+        title: "План. дата",
+        dataIndex: "planDate",
+        key: "planDate"
     },
     {
         title: "Округ",
@@ -28,15 +33,10 @@ const columns = [
         key: "district",
     },
     {
-        title: "Улица",
-        dataIndex: "street",
-        key: "street",
+        title: "Адрес",
+        dataIndex: "address",
+        key: "address",
     },
-    {
-        title: "Дом",
-        dataIndex: "house",
-        key: "house"
-    }
 ];
 
 export const ManagementTable = () => {

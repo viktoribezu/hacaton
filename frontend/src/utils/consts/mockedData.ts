@@ -6,7 +6,10 @@ export const mockedObject = [
         objectCategory: "objectCategory",
         adm_area: "Восточный административный округ",
         street: "Измайловский бульвар",
+        typeOfWork: "Ремонт крыши",
         house: "47",
+        address: "Измайловский бульвар, 47",
+        planDate: "12.06.2023",
         UNOM: "8625"
     },
     {
@@ -17,6 +20,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Парковая 6-я",
         house: "29Б",
+        typeOfWork: "Ремонт крыши",
+        address: "Парковая 6-я, 29 Б",
+        planDate: "22.01.2022",
         UNOM: "18655"
     },
     {
@@ -27,6 +33,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Нижняя Первомайская",
         house: "62",
+        typeOfWork: "Ремонт крыши",
+        address: "Нижняя Первомайская 62",
+        planDate: "22.01.2022",
         UNOM: "19325"
     },
     {
@@ -37,6 +46,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Нижняя Первомайская",
         house: "49",
+        address: "Нижняя Первомайская, 49",
+        typeOfWork: "Ремонт крыши",
+        planDate: "17.02.2022",
         UNOM: "19248"
     },
     {
@@ -47,6 +59,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Парковая 7-я",
         house: "19",
+        typeOfWork: "Ремонт крыши",
+        address: "Парковая 7-я, 19",
+        planDate: "17.02.2022",
         UNOM: "18680"
     },
     {
@@ -57,6 +72,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Подбельского",
         house: "22",
+        planDate: "17.02.2022",
+        address: "Подбельского, 22",
+        typeOfWork: "Ремонт крыши",
         UNOM: "20203"
     },
     {
@@ -67,6 +85,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Парковая 16-я",
         house: "7",
+        planDate: "02.02.2022",
+        typeOfWork: "Ремонт крыши",
+        address: "Парковая 16-я, 7",
         UNOM: "18985"
     },
     {
@@ -77,6 +98,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Первомайская",
         house: "128/9",
+        typeOfWork: "Ремонт крыши",
+        address: "Первомайская 128/9",
+        planDate: "17.02.2022",
         UNOM: "19226"
     },
     {
@@ -87,6 +111,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Щелковское",
         house: "57",
+        address: "Щелковское, 57",
+        planDate: "09.01.2022",
+        typeOfWork: "Ремонт крыши",
         UNOM: "29934"
     },
     {
@@ -97,6 +124,9 @@ export const mockedObject = [
         adm_area: "Восточный административный округ",
         street: "Парковая 6-я",
         house: "20/53",
+        planDate: "09.01.2022",
+        typeOfWork: "Ремонт крыши",
+        address: "Парковая 6-я",
         UNOM: "18648"
     }
 ];
