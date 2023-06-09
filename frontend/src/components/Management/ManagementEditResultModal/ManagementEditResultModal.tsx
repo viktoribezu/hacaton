@@ -4,23 +4,13 @@ import dayjs from "dayjs";
 import { DateFormat } from "@/utils/consts/Dates";
 import "./ManagementEditResultModal.scss";
 import { DefaultOptionType } from "antd/es/cascader";
-import { CascaderOption } from "@/types/AntdTypes";
 import { HStack, VStack } from "@/components/ui";
+import { selectedObjectMock, workSourceMock } from "../ManagementFilterGroup/mockData/objectCategoryMock";
+import { objectRequestMock } from "@/components/Management/ManagementEditResultModal/mockData/mockData";
 
 interface ManagementEditResultModalProps {
     selectedObject: ManagementObject | undefined;
 }
-
-const options: CascaderOption[] = [
-    {
-        value: "zhejiang",
-        label: "Zhejiang",
-    },
-    {
-        value: "jiangsu",
-        label: "Jiangsu",
-    },
-];
 
 const columns = [
     {
@@ -57,7 +47,7 @@ const columns = [
         key: "executor",
         render: (value: string) => (
             <Cascader
-                options={options}
+                options={workSourceMock}
                 placeholder="Please select"
                 showSearch={{ filter }}
                 defaultValue={[value]}
@@ -69,18 +59,23 @@ const columns = [
 const problemsColumns = [
     {
         title: "Дата когда обращение пришло",
-        dataIndex: "plan_date_start",
-        key: "plan_date_start"
+        dataIndex: "requestDate",
+        key: "requestDate"
     },
     {
         title: "От какого сервиса пришло",
-        dataIndex: "problemOwner",
-        key: "problemOwner",
+        dataIndex: "requestSource",
+        key: "requestSource",
     },
     {
         title: "Описание причины обращения",
-        dataIndex: "problemDescription",
-        key: "problemDescription"
+        dataIndex: "requestDescription",
+        key: "requestDescription"
+    },
+    {
+        title: "Статус",
+        dataIndex: "status",
+        key: "status"
     }
 ];
 
@@ -88,54 +83,6 @@ const filter = (inputValue: string, path: DefaultOptionType[]) =>
     path.some(
         (option) => (option.label as string).toLowerCase().indexOf(inputValue.toLowerCase()) > -1,
     );
-
-const selectedObjectMock = [
-    {
-        key: 1,
-        problemType: "Mike",
-        breaking_date: "2001.01.01",
-        start_fix_date: "2001.01.01",
-        update_datefix_at: "2001.01.01",
-        status_of_work: "Жилой дом",
-        executor: "2023",
-    },
-    {
-        key: 2,
-        problemType: "Mike",
-        breaking_date: "2001.01.01",
-        start_fix_date: "2001.01.01",
-        update_datefix_at: "2001.01.01",
-        status_of_work: "Жилой дом",
-        executor: "2023",
-    },
-    {
-        key: 3,
-        problemType: "Mike",
-        breaking_date: "2001.01.01",
-        start_fix_date: "2001.01.01",
-        update_datefix_at: "2001.01.01",
-        status_of_work: "Жилой дом",
-        executor: "2023",
-    },
-    {
-        key: 4,
-        problemType: "Mike",
-        breaking_date: "2001.01.01",
-        start_fix_date: "2001.01.01",
-        update_datefix_at: "2001.01.01",
-        status_of_work: "Жилой дом",
-        executor: "2023",
-    },
-    {
-        key: 5,
-        problemType: "Mike",
-        breaking_date: "2001.01.01",
-        start_fix_date: "2001.01.01",
-        update_datefix_at: "2001.01.01",
-        status_of_work: "Жилой дом",
-        executor: "Zhejiang",
-    },
-];
 
 export const ManagementEditResultModal = (props: ManagementEditResultModalProps) => {
     const { selectedObject } = props;
@@ -145,30 +92,33 @@ export const ManagementEditResultModal = (props: ManagementEditResultModalProps)
         <>
             <VStack max className={"edit__result-modal"}>
                 <HStack gap={16}>
-                    <Card size="small" title={selectedObject?.name}  style={{ width: 250 }}>
+                    <Card size="small" title={"Дом по адресу Измайловский бульвар 47"}  style={{ width: 250 }}>
                         <Descriptions
                             column={1}
                         >
-                            <Descriptions.Item label="Категория объекта">дом</Descriptions.Item>
-                            <Descriptions.Item label="Округ">-</Descriptions.Item>
-                            <Descriptions.Item label="Район">{selectedObject?.district}</Descriptions.Item>
-                            <Descriptions.Item label="Улица">5</Descriptions.Item>
-                            <Descriptions.Item label="Дом">5</Descriptions.Item>
-                            <Descriptions.Item label="Год постройки">2003</Descriptions.Item>
-                            <Descriptions.Item label="Год реконструкции">2003</Descriptions.Item>
-                            <Descriptions.Item label="Кол-во этажей">18</Descriptions.Item>
+                            <Descriptions.Item label="Категория объекта">МКД</Descriptions.Item>
+                            <Descriptions.Item label="Округ">Восточный</Descriptions.Item>
+                            <Descriptions.Item label="Район">Московский</Descriptions.Item>
+                            <Descriptions.Item label="Улица">Измайловский бульвар</Descriptions.Item>
+                            <Descriptions.Item label="Дом">47</Descriptions.Item>
+                            <Descriptions.Item label="Год постройки">1952</Descriptions.Item>
+                            <Descriptions.Item label="Год реконструкции">-</Descriptions.Item>
+                            <Descriptions.Item label="Кол-во этажей">5</Descriptions.Item>
                             <Descriptions.Item label="Аварийность">-</Descriptions.Item>
-                            <Descriptions.Item label="UNOM">4359802</Descriptions.Item>
+                            <Descriptions.Item label="UNOM">8625</Descriptions.Item>
                         </Descriptions>
                     </Card>
-                    <Table
-                        bordered
-                        className={"management__result"}
-                        dataSource={selectedObjectMock}
-                        columns={columns}
-                    />
+                    <VStack>
+                        <Table
+                            bordered
+                            className={"management__result"}
+                            dataSource={selectedObjectMock}
+                            columns={columns}
+                        />
+                    </VStack>
                 </HStack>
                 <Table
+                    dataSource={objectRequestMock}
                     bordered
                     columns={problemsColumns}
                 />

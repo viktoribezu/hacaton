@@ -5,6 +5,7 @@ export const getSelectedRowsKeys = (state: StateSchema) => state.management.sele
 export const getObjectSourceData = (state: StateSchema) => state.management.objectSource;
 export const getObjectIsLoading = (state:StateSchema) => state.management.isLoading;
 export const getObjectInited = (state:StateSchema) => state.management._inited;
+export const getManagementSourceDataIsHas = (state: StateSchema) => Boolean(state.management.objectSource.length);
 
 // Filter group selectors
 export const getManagementFilterObjectCategory = (state: StateSchema) => state.management.filterGroup.objectCategory;
