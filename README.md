@@ -1,4 +1,5 @@
-# Проект 10 для [хакатона](leaders2023.innoagency.ru)
+<!--- # Проект 10 для [хакатона](leaders2023.innoagency.ru) --->
+# Проект 10 для [хакатона](https://i.moscow/lct)
 ## Как запустить
 `docker-compose up --build`
 
